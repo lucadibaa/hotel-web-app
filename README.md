@@ -32,3 +32,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+# General
+
+- Elegant Waikiki hotel rooms & suites only at The Royal Hawaiian.
+- A classic and unforgettable epicurean experience awaits you.
+- Our resort presents itself as an oasis of tranquility.
+- THE ROYAL HAWAIIAN, A LUXURY COLLECTION RESORT WILL KEEP YOU ENTERTAINED & IMMERSED IN A CULTURAL ADVENTURE THROUGHOUT YOUR STAY.
+
+# SPA
+
+- Luxurious spa treatments in a serene tropical garden setting.
