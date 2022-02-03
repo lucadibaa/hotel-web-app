@@ -4,7 +4,7 @@ import ExploreNearby from '../components/home/ExploreNearby'
 import Service from '../components/home/Service'
 import Layout from '../components/layout/Layout'
 
-export default function Home() {
+const Home = () => {
 
   const exploreNearby = [
     {
@@ -96,3 +96,5 @@ export default function Home() {
     </Layout>
   )
 }
+
+export default Home

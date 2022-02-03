@@ -35,7 +35,7 @@ const Footer = () => {
                 © 2022 Copyright: Luca Di Bari
             </div>
         </div>
-    );
+    )
 }
 
-export default Footer;
+export default Footer

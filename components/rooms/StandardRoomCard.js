@@ -9,6 +9,7 @@ const StandardRoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, p
             <div className="relative rounded-l w-96 h-64 flex-1 overflow-hidden">
                 <Image
                     src={img}
+                    alt={name}
                     layout="fill"
                     objectFit="cover"
                     // objectPosition="right"
