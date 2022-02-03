@@ -26,3 +26,73 @@
 body {
     font-family: 'Poppins', sans-serif;
 }
+
+/* Date Range Picker */
+
+#your_unique_start_date_id, 
+#your_unique_end_date_id {
+    border: 1px solid rgb(229 231 235);
+    padding: 8px 12px;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    border-radius: 4px;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 300;
+    font-family: 'Sofia Pro', 'sans-serif';
+}
+
+
+#your_unique_start_date_id:focus,
+ #your_unique_end_date_id:focus {
+    border: 1px solid #CFC291;
+}
+
+.DateRangePicker {
+    position: relative;
+    display: inline !important;
+}
+  
+.DateRangePicker div:not(.DateRangePicker_picker) {
+    background: transparent !important;
+}
+  
+.DateRangePickerInput {
+    position: relative;
+    display: flex !important;
+    align-items: center;
+    gap: 15px;
+}
+
+.DateRangePickerInput__withBorder {
+    border-radius: 5px !important;
+    border: none !important;
+}
+
+.DateRangePicker_picker {
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+}
+
+.CalendarDay__selected_span {
+    background: #CFC291 !important;
+    color: #1C1F15 !important; 
+    border: 1px double #1C1F15 !important; 
+}
+
+.CalendarDay__hovered_span,
+.CalendarDay__hovered_span:hover,
+.CalendarDay__hovered_span:active {
+    background: #EDEAE6 !important;
+    border: 1px double #1C1F15 !important;
+    color: #1C1F15 !important;
+}
+
+.CalendarDay__selected {
+    background: rgba(48, 61, 110, .7) !important;
+    border: 1px double #1C1F15 !important; 
+}
+
+.CalendarDay__selected:hover {
+    background: #303d6e !important;
+}
