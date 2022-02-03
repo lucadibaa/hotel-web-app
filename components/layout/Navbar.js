@@ -33,7 +33,7 @@ const Navbar = () => {
         <div className={`fixed top-0 flex items-center w-screen py-5 px-4 z-50 transition duration-300 ease-in-out sm:hidden ${show ? 'bg-white shadow text-gray-800 h-20 xl:h-16 md:h-12' : 'text-white bg-transparent h-32 xl:h-24 lg:h-20 md:h-16'}`}>
             <div className="relative flex items-center w-full font-semibold text-lg gap-64 2xl:gap-32 xl:text-base lg:gap-24 lg:font-normal md:gap-8">
                 <div className="flex justify-center items-center flex-1 space-x-48 2xl:space-x-32 xl:space-x-24 lg:space-x-16 md:space-x-10">
-                    <Link href="/">
+                    <Link href="/" passHref>
                         <div className={`nav-link ${isActive('/')}`}>Home</div>
                     </Link>
                     {/* <Link href="/rooms"> */}

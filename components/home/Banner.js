@@ -36,12 +36,12 @@ const Banner = () => {
                             <div className="fonst-Sofia text-xl tracking-widest leading-[32px] font-light lg:text-lg md:text-base">DISCOVER AN ICON OF LUXURY & REFINEMENT IN HAWAII</div>
                         </div>
                     </div>
-                    <Image src="https://res.cloudinary.com/drpbnvds9/image/upload/v1642948087/hotel%20web%20app/banner/pexels-elina-sazonova-1838554_fov7uy.jpg" layout="fill" objectFit="cover" />
+                    <Image src="https://res.cloudinary.com/drpbnvds9/image/upload/v1642948087/hotel%20web%20app/banner/pexels-elina-sazonova-1838554_fov7uy.jpg" alt="slide1" layout="fill" objectFit="cover" />
                 </div>
             </SwiperSlide>
             <SwiperSlide>
                 <div className="relative h-screen w-screen">
-                    <Image src="https://res.cloudinary.com/drpbnvds9/image/upload/v1642948080/hotel%20web%20app/banner/the-anam-J9O3WcJ5N74-unsplash_jxky6r.jpg" layout="fill" objectFit="cover" />
+                    <Image src="https://res.cloudinary.com/drpbnvds9/image/upload/v1642948080/hotel%20web%20app/banner/the-anam-J9O3WcJ5N74-unsplash_jxky6r.jpg" alt="slide2" layout="fill" objectFit="cover" />
                 </div>
             </SwiperSlide>
             <SwiperSlide>

@@ -10,6 +10,7 @@ const ExploreNearby = ({ title, desc, img }) => {
             <div className="relative rounded-l w-96 h-64 flex-1 overflow-hidden transition-all duration-1000 group-hover:filter group-hover:brightness-75 xl:h-60 lg:h-40 md:h-52 sm:flex-none sm:w-full sm:h-52 sm:rounded-t sm:rounded-bl-none">
                 <Image
                     src={img}
+                    alt={title}
                     layout="fill"
                     objectFit="cover"
                     objectPosition="left"
