@@ -5,7 +5,7 @@ const Layout = (props) => {
     // CFC291
     return (
         <>
-            <Navbar />
+            <Navbar noBanner={props.noBanner} />
             <div className="bg-snow overflow-x-hidden">
                 {props.children}
             </div>

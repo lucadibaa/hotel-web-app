@@ -30,7 +30,7 @@ module.exports = {
         'moss': '#54612C',
         'jungle': '#1C1F15',
         'platinum': '#EDEAE6',
-        'asphalt': "#404040",
+        'asphalt': "#484848",
         'black': '#0F0F0F',
         'snow': '#f6f6f6',
       },

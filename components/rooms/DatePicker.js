@@ -65,11 +65,11 @@ const DatePicker = ({ show, setShow }) => {
                 />
             </div>
             <div className="flex-[.6] flex justify-end">
-                {/* <Link href="/booking"> */}
-                <button className="w-full rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30">
-                    Book Now
-                </button>
-                {/* </Link> */}
+                <Link href="/booking">
+                    <button className="w-full rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30">
+                        Book Now
+                    </button>
+                </Link>
             </div>
         </div>
     )

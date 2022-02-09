@@ -19,7 +19,7 @@
       @apply font-light tracking-widest cursor-pointer
     }
     .select {
-      @apply border py-2 px-3 font-light tracking-wider rounded shadow-sm outline-none cursor-pointer focus:border-ecru
+      @apply w-52 h-[42px] border py-2 px-3 font-light tracking-wider rounded shadow-sm outline-none cursor-pointer focus:border-ecru
     }
 }
 
@@ -60,12 +60,16 @@ body {
     position: relative;
     display: flex !important;
     align-items: center;
-    gap: 15px;
+    gap: 20px;
 }
 
 .DateRangePickerInput__withBorder {
     border-radius: 5px !important;
     border: none !important;
+}
+
+.DateInput {
+    width: 208px !important;
 }
 
 .DateRangePicker_picker {
