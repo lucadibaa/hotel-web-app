@@ -54,7 +54,7 @@ const SuiteCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price })
                             </div>
                         </div>
                         <div className="flex items-end justify-between">
-                            <Link href="/room">
+                            <Link href="/room" passHref>
                                 <button className="text-sm rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30">
                                     Book Now
                                 </button>

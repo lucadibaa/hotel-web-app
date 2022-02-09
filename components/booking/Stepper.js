@@ -7,7 +7,7 @@ const Stepper = () => {
     return (
         <div className="w-10/12 mx-auto">
             <div className="h-6 flex items-center justify-between">
-                <div className={`w-1/2 h-1 flex items-center ${active === 1 ? 'bg-gray-300' : 'bg-asphalt'}`} title={active !== 1 && "Rooms"}>
+                <div className={`w-1/2 h-1 flex items-center ${active === 1 ? 'bg-gray-300' : 'bg-asphalt'}`} title={active !== 1 ? "Rooms" : undefined}>
                     <div className={`relative text-white h-6 w-6 rounded-full shadow flex text-xs items-center text-center justify-center ${active === 1 ? 'bg-white' : 'bg-asphalt'}`}>
                         {active === 1 ? <div className="h-3 w-3 bg-asphalt rounded-full" /> : 1}
                         {
@@ -29,7 +29,7 @@ const Stepper = () => {
                         }
                     </div>
                 </div>
-                <div className={`w-1/2 h-1 flex items-center ${active !== 3 ? 'bg-gray-300' : 'bg-asphalt'}`} title={active !== 2 && "Guests details"}>
+                <div className={`w-1/2 h-1 flex items-center ${active !== 3 ? 'bg-gray-300' : 'bg-asphalt'}`} title={active !== 2 ? "Guests details" : undefined}>
                     <div className={`relative text-white h-6 w-6 rounded-full shadow flex text-xs items-center text-center justify-center ${active === 2 ? 'bg-white' : 'bg-asphalt'}`}>
                         {active === 2 ? <div className="h-3 w-3 bg-asphalt rounded-full" /> : 2}
                         {
@@ -51,7 +51,7 @@ const Stepper = () => {
                         }
                     </div>
                 </div>
-                <div className="bg-gray-300 h-1 flex items-center" title={active !== 3 && "Confirmation"}>
+                <div className="bg-gray-300 h-1 flex items-center" title={active !== 3 ? "Confirmation" : undefined}>
                     <div className={`relative text-white h-6 w-6 rounded-full shadow flex text-xs items-center text-center justify-center ${active === 3 ? 'bg-white' : 'bg-asphalt'}`}>
                         {active === 3 ? <div className="h-3 w-3 bg-asphalt rounded-full" /> : 3}
                         {

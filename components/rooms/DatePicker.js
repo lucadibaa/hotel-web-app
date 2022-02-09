@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { DateRangePicker } from "react-dates"
 import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
@@ -13,18 +13,18 @@ const DatePicker = ({ show, setShow }) => {
 
     const [focus, setFocus] = useState(null)
 
-    const navbarTransition = () => {
+    const navbarTransition = useCallback(() => {
         if (window.scrollY > 290) {
             setShow(true)
         } else {
             setShow(false)
         }
-    }
+    }, [setShow])
 
     useEffect(() => {
         window.addEventListener('scroll', navbarTransition)
         return () => window.removeEventListener('scroll', navbarTransition)
-    }, [])
+    }, [navbarTransition])
 
     return (
         <div className={`w-full h-16 bg-white font-Sofia shadow flex items-center justify-between px-[2%] ${show && 'fixed top-20 z-40'}`}>
@@ -65,7 +65,7 @@ const DatePicker = ({ show, setShow }) => {
                 />
             </div>
             <div className="flex-[.6] flex justify-end">
-                <Link href="/booking">
+                <Link href="/booking" passHref>
                     <button className="w-full rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30">
                         Book Now
                     </button>

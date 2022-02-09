@@ -6,7 +6,7 @@ import Link from "next/link"
 
 const SuperiorRoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price }) => {
     return (
-        <Link href="/room">
+        <Link href="/room" passHref>
             <div className="flex flex-col w-[calc(50%-0.75rem)] h-full bg-white border border-gray-100 rounded-lg shadow-sm p-2 cursor-pointer group even:-mt-40">
                 <div className="relative rounded-t w-full h-[480px] overflow-hidden">
                     <Image

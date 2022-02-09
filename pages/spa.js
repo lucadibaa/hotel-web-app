@@ -14,6 +14,7 @@ const Spa = () => {
                 </div>
                 <Image
                     src="https://res.cloudinary.com/drpbnvds9/image/upload/v1643135475/hotel%20web%20app/services/spa/spa_bg_fdeokw.jpg"
+                    alt="spa opening soon"
                     layout="fill"
                 />
             </div>

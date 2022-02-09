@@ -39,7 +39,7 @@ const RoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price }) 
                     </div>
                     <div className="flex items-center tracking-wide text-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 mr-2" viewBox="0 0 40 40">
-                            <path fill="none" stroke="#000000" stroke-width="1.002" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M9.4 10.2h21v21.2h-21zm-7-1.8l6.9 1.7v21.4l-6.9 1.7zm3.5 23.7V9.4M9.3 26l-6.9 1.1m6.9-6.5H2.4m6.9-5.5l-6.9-.9m34.9 19l-7-1.8V10.1l7-1.8zM33.8 9.4v22.7m-3.5-16.6l7-1.1m-7 6.6l7-.1m-7 5.5l7 .9"></path>
+                            <path fill="none" stroke="#000000" strokeWidth="1.002" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" d="M9.4 10.2h21v21.2h-21zm-7-1.8l6.9 1.7v21.4l-6.9 1.7zm3.5 23.7V9.4M9.3 26l-6.9 1.1m6.9-6.5H2.4m6.9-5.5l-6.9-.9m34.9 19l-7-1.8V10.1l7-1.8zM33.8 9.4v22.7m-3.5-16.6l7-1.1m-7 6.6l7-.1m-7 5.5l7 .9"></path>
                             <g fill="#000000">
                                 <ellipse cx="25.6" cy="16.9" rx="2" ry="2"></ellipse>
                                 <path d="M28.6 25.7l-5.7-6-1.5 1.5 4.5 4.5h-1.4l-6.4-6.6-6.7 6.6"></path>
@@ -90,7 +90,7 @@ const RoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price }) 
                             </div>
                         </div>
                         <div className="flex justify-between">
-                            <span className="text-[13px] w-2/3">Enjoy a blissful night's sleep in St Martin and wake up to paradise each morning.</span>
+                            <span className="text-[13px] w-2/3">Enjoy a blissful night&apos;s sleep in St Martin and wake up to paradise each morning.</span>
                             <button className="text-sm rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30">
                                 Book Now
                             </button>

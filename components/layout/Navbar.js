@@ -36,7 +36,7 @@ const Navbar = ({ noBanner }) => {
                     <Link href="/" passHref>
                         <div className={`nav-link ${isActive('/')}`}>Home</div>
                     </Link>
-                    <Link href="/rooms">
+                    <Link href="/rooms" passHref>
                         <div className={`nav-link ${isActive('/rooms')}`}>Rooms</div>
                     </Link>
                     {/* <Link href="/spa"> */}
