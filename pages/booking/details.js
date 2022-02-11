@@ -8,12 +8,24 @@ import CreateAccount from "../../components/booking/CreateAccount"
 import Policies from "../../components/booking/Policies"
 import PaymentOptions from "../../components/booking/PaymentOptions"
 import Acknowledgement from "../../components/booking/Acknowledgement"
-import Link from "next/link"
 import { useRouter } from 'next/router'
 
 const Details = () => {
 
     const router = useRouter()
+    const { arrival, departure, nights, guests } = router.query
+
+    const handleClick = () => {
+        router.replace({
+            pathname: '/booking',
+            query: {
+                arrival,
+                departure,
+                nights,
+                guests
+            }
+        })
+    }
 
     const handleSubmit = values => {
         console.log(values)
@@ -68,11 +80,9 @@ const Details = () => {
                             <Acknowledgement />
 
                             <section className="flex items-center justify-between">
-                                <Link href="/booking">
-                                    <button type="button" className="text-sm rounded font-light tracking-wid text-jungle px-4 py-2 transition-all border border-jungle/30 hover:border-jungle/60 bg-white">
-                                        Previous Step
-                                    </button>
-                                </Link>
+                                <button onClick={handleClick} type="button" className="text-sm rounded font-light tracking-wid text-jungle px-4 py-2 transition-all border border-jungle/30 hover:border-jungle/60 bg-white">
+                                    Previous Step
+                                </button>
                                 <button type="submit" className="text-sm rounded tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru hover:border-jungle/20 bg-ecru/40 hover:bg-ecru/90">
                                     Complete Booking
                                 </button>

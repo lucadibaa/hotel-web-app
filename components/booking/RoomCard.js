@@ -1,10 +1,33 @@
 import Image from "next/image"
 import { TemplateIcon, UsersIcon } from '@heroicons/react/outline'
-import { GiForkKnifeSpoon, GiWindow } from 'react-icons/gi'
+import { GiForkKnifeSpoon } from 'react-icons/gi'
 import { IoBedOutline } from 'react-icons/io5'
 import { MdCoffeeMaker, MdPets } from 'react-icons/md'
+import { useRouter } from "next/router"
+import moment from "moment"
 
-const RoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price }) => {
+const RoomCard = ({ name, img, bed, guests, breakfast, sqmts, price, selectedGuests, datesRange }) => {
+
+    const router = useRouter()
+
+    const { startDate, endDate } = datesRange
+
+    const handleClick = () => {
+        if (startDate && endDate && selectedGuests) {
+            router.push({
+                pathname: '/booking/details',
+                query: {
+                    arrival: moment(startDate).format('DD-MM-YYYY'),
+                    departure: moment(endDate).format('DD-MM-YYYY'),
+                    nights: endDate.diff(startDate, 'days'),
+                    guests: selectedGuests
+                }
+            })
+        } else {
+            alert('Please select a valid date range')
+        }
+    }
+
     return (
         <div className="flex w-full bg-white border border-gray-100 text-asphalt rounded-lg shadow-sm p-3 group md:w-full sm:flex-col">
             <div className="space-y-5">
@@ -84,14 +107,14 @@ const RoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price }) 
                         <div className="flex justify-between">
                             <span>ROOM RATE</span>
                             <div className="flex flex-col items-end">
-                                <span>€ 4,665</span>
-                                <span className="text-xs font-light mb-0.5">Total for 3 nights</span>
+                                <span>€ {price * endDate?.diff(startDate, 'days') || '...'}</span>
+                                <span className="text-xs font-light mb-0.5">Total for {endDate?.diff(startDate, 'days') || '...'} nights</span>
                                 <span className="text-xs font-light">Including Taxes & Fees</span>
                             </div>
                         </div>
                         <div className="flex justify-between">
                             <span className="text-[13px] w-2/3">Enjoy a blissful night&apos;s sleep in St Martin and wake up to paradise each morning.</span>
-                            <button className="text-sm rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30">
+                            <button onClick={handleClick} className="text-sm rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30">
                                 Book Now
                             </button>
                         </div>

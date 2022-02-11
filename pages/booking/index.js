@@ -4,6 +4,10 @@ import GuestsDatesSelector from "../../components/booking/GuestsDatesSelector"
 import Stepper from "../../components/booking/Stepper"
 import Filters from "../../components/booking/Filters"
 import RoomCard from "../../components/booking/RoomCard"
+import { useState } from "react"
+import moment from "moment"
+import { useRouter } from "next/router"
+import { toAmerican } from "../../utils/functions"
 
 const Booking = () => {
 
@@ -30,6 +34,16 @@ const Booking = () => {
         },
     ]
 
+    const router = useRouter()
+    const { arrival, departure, guests: qGuests } = router.query
+
+    const [guests, setGuests] = useState(qGuests || '2')
+
+    const [datesRange, setDatesRange] = useState({
+        startDate: arrival ? moment(toAmerican(arrival)) : moment(),
+        endDate: departure ? moment(toAmerican(departure)) : moment().add(2, 'days')
+    })
+
     return (
         <Layout noBanner>
             <Head>
@@ -41,7 +55,7 @@ const Booking = () => {
                 {/* Left */}
                 <div className="w-3/4 space-y-3">
                     <section className="w-full bg-white h-16 font-Sofia border-b shadow-sm flex items-center justify-evenly">
-                        <GuestsDatesSelector />
+                        <GuestsDatesSelector datesRange={datesRange} setDatesRange={setDatesRange} guests={guests} setGuests={setGuests} />
                     </section>
 
                     <section className="bg-white h-28 border-b shadow-sm">
@@ -57,7 +71,7 @@ const Booking = () => {
                         <div className="flex flex-wrap gap-2">
                             {
                                 rooms.map(r => (
-                                    <RoomCard key={r.price} name={r.name} img={r.img} bed={r.bed} guests={r.guests} breakfast={r.breakfast} sqmts={r.sqmts} ratings={r.ratings} price={r.price} />
+                                    <RoomCard key={r.price} name={r.name} img={r.img} bed={r.bed} guests={r.guests} breakfast={r.breakfast} sqmts={r.sqmts} price={r.price} selectedGuests={guests} datesRange={datesRange} />
                                 ))
                             }
                         </div>
