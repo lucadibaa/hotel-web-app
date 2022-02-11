@@ -1,9 +1,9 @@
 import Head from "next/head"
-import Layout from "../components/layout/Layout"
-import GuestsDatesSelector from "../components/booking/GuestsDatesSelector"
-import Stepper from "../components/booking/Stepper"
-import Filters from "../components/booking/Filters"
-import RoomCard from "../components/booking/RoomCard"
+import Layout from "../../components/layout/Layout"
+import GuestsDatesSelector from "../../components/booking/GuestsDatesSelector"
+import Stepper from "../../components/booking/Stepper"
+import Filters from "../../components/booking/Filters"
+import RoomCard from "../../components/booking/RoomCard"
 
 const Booking = () => {
 
@@ -46,7 +46,7 @@ const Booking = () => {
 
                     <section className="bg-white h-28 border-b shadow-sm">
                         <h2 className="pl-5 py-1.5 text-xl font-Sofia tracking-wide text-asphalt">Select a Room</h2>
-                        <Stepper />
+                        <Stepper active={1} />
                     </section>
 
                     <section className="bg-white h-16 border-b shadow-sm flex items-center justify-end space-x-10 pr-10">

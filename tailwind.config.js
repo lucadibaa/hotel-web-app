@@ -33,6 +33,8 @@ module.exports = {
         'asphalt': "#484848",
         'black': '#0F0F0F',
         'snow': '#f6f6f6',
+        'error': '#D43616',
+        'error-light': '#EA5234',
       },
       fontFamily: {
         PlayfairDisplay: ['"Playfair Display"', 'serif'],

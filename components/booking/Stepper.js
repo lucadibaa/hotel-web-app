@@ -1,8 +1,4 @@
-import { useState } from "react"
-
-const Stepper = () => {
-
-    const [active, setActive] = useState(1)
+const Stepper = ({ active }) => {
 
     return (
         <div className="w-10/12 mx-auto">
