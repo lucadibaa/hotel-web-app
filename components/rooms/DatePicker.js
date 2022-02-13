@@ -1,4 +1,6 @@
+import moment from "moment"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import { useCallback, useEffect, useState } from "react"
 import { DateRangePicker } from "react-dates"
 import 'react-dates/initialize'
@@ -6,11 +8,12 @@ import 'react-dates/lib/css/_datepicker.css'
 
 const DatePicker = ({ show, setShow }) => {
 
+    const router = useRouter()
+
     const [datesRange, setDatesRange] = useState({
         startDate: null,
         endDate: null
     })
-
     const [focus, setFocus] = useState(null)
 
     const navbarTransition = useCallback(() => {
@@ -26,6 +29,20 @@ const DatePicker = ({ show, setShow }) => {
         return () => window.removeEventListener('scroll', navbarTransition)
     }, [navbarTransition])
 
+    const [guests, setGuests] = useState('')
+
+    const handleClick = () => {
+        router.push({
+            pathname: '/booking',
+            query: {
+                arrival: moment(datesRange.startDate).format('DD-MM-YYYY'),
+                departure: moment(datesRange.endDate).format('DD-MM-YYYY'),
+                nights: datesRange.endDate.diff(datesRange.startDate, 'days'),
+                guests
+            }
+        })
+    }
+
     return (
         <div className={`w-full h-16 bg-white font-Sofia shadow flex items-center justify-between px-[2%] ${show && 'fixed top-20 z-40'}`}>
             <div className="flex-[2] flex gap-8">
@@ -34,7 +51,7 @@ const DatePicker = ({ show, setShow }) => {
                     <option className="option" value="Historic Garden Room">Historic Garden Room</option>
                     <option className="option" value="Historic Ocean Room">Historic Ocean Room</option>
                 </select>
-                <select className="flex-[1.5] select">
+                <select className="flex-[1.5] select" onChange={e => setGuests(e.target.value)}>
                     <option className="option" value="" selected disabled>Guests</option>
                     <option className="option" value="1">1 Adult Per Room</option>
                     <option className="option" value="2">2 Adults Per Room</option>
@@ -65,11 +82,9 @@ const DatePicker = ({ show, setShow }) => {
                 />
             </div>
             <div className="flex-[.6] flex justify-end">
-                <Link href="/booking" passHref>
-                    <button className="w-full rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30">
-                        Book Now
+                <button onClick={handleClick} className="w-full rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30">
+                    Book Now
                     </button>
-                </Link>
             </div>
         </div>
     )

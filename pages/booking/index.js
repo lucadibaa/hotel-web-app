@@ -8,6 +8,7 @@ import { useState } from "react"
 import moment from "moment"
 import { useRouter } from "next/router"
 import { toAmerican } from "../../utils/functions"
+import InfoSection from "../../components/booking/InfoSection"
 
 const Booking = () => {
 
@@ -80,12 +81,7 @@ const Booking = () => {
                 </div>
 
                 {/* Right */}
-                <div className="w-1/4 h-96 bg-red-900 rounded-sm">
-                    <section>
-                        {/* Reservation Info */}
-                        info
-                    </section>
-                </div>
+                <InfoSection startDate={datesRange.startDate} endDate={datesRange.endDate} guests={guests} />
 
             </main>
 

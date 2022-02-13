@@ -9,6 +9,9 @@ import Policies from "../../components/booking/Policies"
 import PaymentOptions from "../../components/booking/PaymentOptions"
 import Acknowledgement from "../../components/booking/Acknowledgement"
 import { useRouter } from 'next/router'
+import InfoSection from "../../components/booking/InfoSection"
+import moment from "moment"
+import { toAmerican } from "../../utils/functions"
 
 const Details = () => {
 
@@ -29,6 +32,11 @@ const Details = () => {
 
     const handleSubmit = values => {
         console.log(values)
+
+        if (values.password) {
+            // dispatch register
+        }
+
         if (values.payment === 'hotel') {
             router.push('confirmation')
         } else {
@@ -93,12 +101,7 @@ const Details = () => {
                 </Formik>
 
                 {/* Right */}
-                <div className="w-1/4 h-96 bg-red-900 rounded-sm">
-                    <section>
-                        {/* Reservation Info */}
-                        info
-                    </section>
-                </div>
+                <InfoSection startDate={moment(toAmerican(arrival))} endDate={moment(toAmerican(departure))} guests={guests} />
 
             </main>
         </Layout>

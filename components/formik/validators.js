@@ -5,7 +5,7 @@ export const bookingSchema = yup.object().shape({
     lastName: yup.string().required('Required'),
     cell: yup.string().matches(/^[0-9]+$/, "Cell number is invalid"),
     email: yup.string().email('Invalid Email').required('Required'),
-    password: yup.string(),
+    password: yup.string().min(6, 'Password must be at least 6 characters long'),
     requests: yup.string().max(300, 'max 300 characters'),
     payment: yup.string(),
     newsletter: yup.boolean(),
