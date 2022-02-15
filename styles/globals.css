@@ -19,7 +19,7 @@
       @apply font-light tracking-widest cursor-pointer
     }
     .select {
-      @apply w-52 h-[42px] border py-2 px-3 font-light tracking-wider rounded shadow-sm outline-none cursor-pointer focus:border-ecru
+      @apply w-52 h-[42px] border py-2 px-3 font-light tracking-wider rounded shadow-sm outline-none cursor-pointer focus:border-ecru md:h-8 md:py-0 md:text-sm sm:py-1
     }
 }
 
@@ -70,6 +70,56 @@ body {
 
 .DateInput {
     width: 208px !important;
+}
+
+@media screen and (max-width: 1535px) {
+    .DateInput {
+        width: 150px !important;
+    }
+}
+
+@media screen and (max-width: 1279px) {
+    .DateInput {
+        width: 140px !important;
+    }
+    .DateRangePickerInput {
+        gap: 10px
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .DateInput {
+        width: 180px !important;
+    }
+    .DateRangePickerInput {
+        gap: 15px
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .DateInput {
+        width: 150px !important;
+    }
+    .DateRangePickerInput {
+        gap: 10px
+    }
+    #your_unique_start_date_id, 
+    #your_unique_end_date_id {
+        padding: 6px 12px;
+    }
+}
+
+@media screen and (max-width: 639px) {
+    .DateInput {
+        width: 120px !important;
+    }
+    .DateRangePickerInput {
+        gap: 15px
+    }
+    #your_unique_start_date_id, 
+    #your_unique_end_date_id {
+        padding: 4px 8px;
+    }
 }
 
 .DateRangePicker_picker {

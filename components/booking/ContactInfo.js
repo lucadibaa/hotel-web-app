@@ -5,7 +5,7 @@ const ContactInfo = () => {
 
     const user = false
 
-    const textareaStyle = "w-full bg-base-light p-2 mt-1.5 mb-0.5 focus:outline-none focus:border focus:border-ecru border border-gray-300 rounded resize-none text-sm"
+    const textareaStyle = "w-full p-2 mt-1.5 mb-0.5 focus:outline-none focus:border focus:border-ecru border border-gray-300 rounded resize-none text-sm"
     const inputStyle = "text-gray-600 focus:outline-none focus:border focus:border-ecru w-full h-10 pl-2 border border-gray-300 rounded text-sm"
     const labelStyle = "ml-0.5 text-sm"
 
