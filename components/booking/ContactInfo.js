@@ -10,7 +10,7 @@ const ContactInfo = () => {
     const labelStyle = "ml-0.5 text-sm"
 
     return (
-        <section className="bg-white border-b shadow-sm p-5">
+        <section className="bg-white border-b shadow-sm p-5 sm:px-3">
             <div className="flex justify-between items-center">
                 <h2 className="text-xl font-Sofia tracking-wide text-asphalt">CONTACT INFO</h2>
                 {
@@ -23,27 +23,27 @@ const ContactInfo = () => {
                 }
             </div>
 
-            <div className="space-y-4 bg-base px-4 flex flex-col py-3 justify-center">
-                <div className="flex flex-wrap -mx-2 mb-2">
-                    <div className="px-6 w-1/2">
+            <div className="space-y-4 bg-base px-4 flex flex-col py-3 justify-center xl:space-y-0 xl:p-2">
+                <div className="flex flex-wrap -mx-2 mb-2 sm:space-y-2">
+                    <div className="px-6 w-1/2 md:px-4 sm:w-full">
                         <TextField inputClasses={inputStyle} labelClasses={labelStyle} label="Name*" name="firstName" type="text" />
                     </div>
-                    <div className="px-6 w-1/2">
+                    <div className="px-6 w-1/2 md:px-4 sm:w-full">
                         <TextField inputClasses={inputStyle} labelClasses={labelStyle} label="Surname*" name="lastName" type="text" />
                     </div>
                 </div>
-                <div className="flex flex-wrap -mx-2 pb-2">
-                    <div className="px-6 w-1/2">
+                <div className="flex flex-wrap -mx-2 pb-2 sm:space-y-2">
+                    <div className="px-6 w-1/2 md:px-4 sm:w-full">
                         <TextField inputClasses={inputStyle} labelClasses={labelStyle} label="Email*" name="email" type="email" />
                     </div>
-                    <div className="px-6 w-1/2">
+                    <div className="px-6 w-1/2 md:px-4 sm:w-full">
                         <TextField inputClasses={inputStyle} labelClasses={labelStyle} label="Cell Phone" name="cell" type="text" />
                     </div>
                 </div>
             </div>
 
-            <div className="px-8">
-                <h2 className="font-light font-Sofia tracking-wide text-asphalt">ADDITIONAL DETAILS AND PREFERENCES</h2>
+            <div className="px-8 xl:px-6 md:px-4">
+                <h2 className="font-light font-Sofia tracking-wide text-asphalt sm:text-sm">ADDITIONAL DETAILS AND PREFERENCES</h2>
                 <div>
                     <TextArea name="requests" placeholder="Please note your requests or special needs" textareaStyle={textareaStyle} rows="8" />
                 </div>

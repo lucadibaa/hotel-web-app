@@ -12,7 +12,7 @@ const InfoSection = ({ startDate, endDate, guests }) => {
     const [isHidden, setIsHidden] = useState(true)
 
     return (
-        <div className={`flex-1 h-full bg-camel/30 rounded-sm 2xl:flex-[1.2] lg:flex-none lg:w-2/3 lg:mx-auto sm:w-11/12 ${isHidden && width < 639 && 'h-10'}`}>
+        <div className={`flex-[1.1] h-full bg-camel/30 rounded-sm 2xl:flex-[1.2] lg:flex-none lg:w-2/3 lg:mx-auto sm:w-11/12 ${isHidden && width < 639 && 'h-10'}`}>
             <section>
                 <div className={`flex justify-between items-end ${isHidden && width < 639 && 'pb-3'}`}>
                     <h2 className={`pl-5 pt-3 text-lg font-Sofia tracking-wider text-asphalt xl:text-base`}>YOUR STAY</h2>
@@ -27,7 +27,7 @@ const InfoSection = ({ startDate, endDate, guests }) => {
                 </div>
                 {
                     ((!isHidden && width < 639) || width > 639) &&
-                    <div className="text-sm flex space-x-14 my-2 px-5 2xl:space-x-10 xl:flex-col xl:space-x-0 xl:space-y-1.5 lg:flex-row lg:space-x-24 lg:space-y-0 sm:justify-between sm:space-x-0">
+                    <div className="text-sm flex my-2 px-5 space-x-10 xl:flex-col xl:space-x-0 xl:space-y-1.5 lg:flex-row lg:space-x-24 lg:space-y-0 sm:justify-between sm:space-x-0">
                         <div className={`flex flex-col ${startDate ? 'visible' : 'invisible'}`}>
                             <span className="font-medium xl:font-normal">Check In</span>
                             <span className="font-light">{moment(startDate).format('ddd DD, MMM YYYY')}</span>

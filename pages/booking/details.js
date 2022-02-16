@@ -50,7 +50,7 @@ const Details = () => {
                 <title>Gold Arc Hotel | Booking</title>
             </Head>
 
-            <main className="mt-24 max-w-[75%] mx-auto pb-20 flex gap-6">
+            <main className="mt-24 max-w-[75%] mx-auto pb-20 flex gap-6 2xl:max-w-[85%] 2xl:gap-4 xl:mt-20 lg:flex-col-reverse lg:max-w-[90%] sm:mt-4">
 
                 {/* Left */}
                 <Formik
@@ -69,7 +69,7 @@ const Details = () => {
                     validationSchema={bookingSchema}
                     onSubmit={values => handleSubmit(values)}
                 >
-                    <div className="w-3/4">
+                    <div className="flex-[3] lg:flex-none">
                         <Form className="space-y-3">
 
                             <section className="bg-white h-32 border-b shadow-sm">

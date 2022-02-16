@@ -8,11 +8,11 @@ const Acknowledgement = () => {
                 <div className="px-2 w-full space-x-5 flex items-center">
                     <CheckField labelClasses={'text-sm ml-4'} label="I would like to receive newsletters and special offers by email." name="newsletter" type="checkbox" />
                 </div>
-                <div className="px-2 w-full space-x-5 flex items-center">
+                <div className="px-2 w-full space-x-5 flex items-center sm:flex-col sm:items-start sm:space-x-8">
                     <CheckField labelClasses={'text-sm ml-1'} label="* I agree with the Privacy Terms." name="privacy" type="checkbox" />
                     <span className="text-xs font-light mb-0.5 border-b border-ecru cursor-pointer">Privacy Policy</span>
                 </div>
-                <div className="px-2 w-full space-x-5 flex items-center">
+                <div className="px-2 w-full space-x-5 flex items-center sm:flex-col sm:items-start sm:space-x-8">
                     <CheckField labelClasses={'text-sm ml-1'} label="* I agree with the Booking Conditions." name="booking" type="checkbox" />
                     <span className="text-xs font-light mb-0.5 border-b border-ecru cursor-pointer">Terms & Conditions</span>
                 </div>
