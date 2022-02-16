@@ -119,6 +119,7 @@ body {
     #your_unique_start_date_id, 
     #your_unique_end_date_id {
         padding: 4px 8px;
+        font-size: 15px;
     }
 }
 

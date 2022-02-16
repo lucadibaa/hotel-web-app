@@ -51,11 +51,11 @@ const Booking = () => {
                 <title>Gold Arc Hotel | Booking</title>
             </Head>
 
-            <main className="mt-24 max-w-[75%] mx-auto pb-20 flex gap-6">
+            <main className="mt-24 max-w-[75%] mx-auto pb-20 flex gap-6 2xl:max-w-[85%] 2xl:gap-4 xl:mt-20 lg:flex-col-reverse lg:max-w-[90%] sm:mt-4">
 
                 {/* Left */}
-                <div className="w-3/4 space-y-3">
-                    <section className="w-full bg-white h-16 font-Sofia border-b shadow-sm flex items-center justify-evenly">
+                <div className="flex-[3] space-y-3 lg:flex-none">
+                    <section className="w-full bg-white h-16 font-Sofia border-b shadow-sm flex items-center justify-evenly md:h-24">
                         <GuestsDatesSelector datesRange={datesRange} setDatesRange={setDatesRange} guests={guests} setGuests={setGuests} />
                     </section>
 
@@ -64,11 +64,11 @@ const Booking = () => {
                         <Stepper active={1} />
                     </section>
 
-                    <section className="bg-white h-16 border-b shadow-sm flex items-center justify-end space-x-10 pr-10">
+                    <section className="bg-white h-16 border-b shadow-sm flex items-center justify-end space-x-10 pr-10 sm:px-2 sm:space-x-8">
                         <Filters />
                     </section>
 
-                    <section className="pt-2">
+                    <section className="pt-2 sm:pt-0.5">
                         <div className="flex flex-wrap gap-2">
                             {
                                 rooms.map(r => (

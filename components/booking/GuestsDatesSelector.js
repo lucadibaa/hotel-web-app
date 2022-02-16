@@ -8,9 +8,9 @@ const GuestsDatesSelector = ({ datesRange, setDatesRange, guests, setGuests }) =
     const [focus, setFocus] = useState(null)
 
     return (
-        <>
-            <div className="flex items-center gap-3">
-                <select className="select" onChange={e => setGuests(e.target.value)}>
+        <div className="flex justify-evenly items-center w-full md:flex-col-reverse md:items-start md:px-3 md:gap-1.5 sm:items-center">
+            <div className="flex items-center gap-3 md:self-end sm:self-center" >
+                <select className="select 2xl:h-9 2xl:py-0" onChange={e => setGuests(e.target.value)}>
                     <option className="option" selected={guests === '' ? true : false} value="" disabled>Guests</option>
                     <option className="option" selected={guests === '1' ? true : false} value="1">1 Adult</option>
                     <option className="option" selected={guests === '2' ? true : false} value="2">2 Adults</option>
@@ -43,7 +43,7 @@ const GuestsDatesSelector = ({ datesRange, setDatesRange, guests, setGuests }) =
                     }
                 />
             </div>
-        </>
+        </div >
     )
 }
 

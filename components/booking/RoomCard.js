@@ -29,9 +29,9 @@ const RoomCard = ({ name, img, bed, guests, breakfast, sqmts, price, selectedGue
     }
 
     return (
-        <div className="flex w-full bg-white border border-gray-100 text-asphalt rounded-lg shadow-sm p-3 group md:w-full sm:flex-col">
+        <div className="flex w-full bg-white border border-gray-100 text-asphalt rounded-lg shadow-sm p-3 group xl:p-2 sm:flex-col sm:space-y-2.5">
             <div className="space-y-5">
-                <div className="relative rounded-sm w-72 h-40 overflow-hidden">
+                <div className="relative rounded-sm w-72 h-40 overflow-hidden xl:w-64 sm:w-full">
                     <Image
                         src={img}
                         alt={name}
@@ -40,7 +40,7 @@ const RoomCard = ({ name, img, bed, guests, breakfast, sqmts, price, selectedGue
                         className="rounded-l"
                     />
                 </div>
-                <div className="space-y-2">
+                <div className="space-y-2 sm:hidden">
                     <div className="flex items-center tracking-wide text-xs">
                         <IoBedOutline className="text-lg mr-2" />
                         <span>{bed}</span>
@@ -80,16 +80,16 @@ const RoomCard = ({ name, img, bed, guests, breakfast, sqmts, price, selectedGue
                     </div>
                 </div>
             </div>
-            <div className="flex-[2] flex px-8">
+            <div className="flex-[2] flex px-8 xl:px-4 sm:px-2">
                 <div className="flex-1 flex flex-col justify-between">
                     <div className="mb-4">
-                        <div className="mb-1 text-camel text-xl font-PlayfairDisplay font-semibold italic tracking-wide">
+                        <div className="mb-1 text-camel text-xl font-PlayfairDisplay font-semibold italic tracking-wide sm:mb-0.5">
                             {name}
                         </div>
                         <span className="text-[15px]">Garden Suite</span>
-                        <div className="text-[13px] mt-4 space-y-2.5">
+                        <div className="text-[13px] mt-4 space-y-2.5 sm:mt-1.5">
                             <span>Sleeps 4 | 2 King | {sqmts} m²</span>
-                            <div className="w-2/3">This unique suite overlooks Baie Longue with an alfresco dining area for breakfasts with a view.</div>
+                            <div className="w-2/3 sm:w-full">This unique suite overlooks Baie Longue with an alfresco dining area for breakfasts with a view.</div>
                             <ul className="list-inside list-disc">
                                 <li>Private infinity pool</li>
                                 <li>Private infinity pool</li>
@@ -103,17 +103,17 @@ const RoomCard = ({ name, img, bed, guests, breakfast, sqmts, price, selectedGue
 
                     <hr />
 
-                    <div className="mt-3 space-y-5">
+                    <div className="mt-3 space-y-5 xl:space-y-3 sm:space-y-0">
                         <div className="flex justify-between">
-                            <span>ROOM RATE</span>
+                            <span className="xl:text-sm">ROOM RATE</span>
                             <div className="flex flex-col items-end">
                                 <span>€ {price * endDate?.diff(startDate, 'days') || '...'}</span>
                                 <span className="text-xs font-light mb-0.5">Total for {endDate?.diff(startDate, 'days') || '...'} nights</span>
                                 <span className="text-xs font-light">Including Taxes & Fees</span>
                             </div>
                         </div>
-                        <div className="flex justify-between">
-                            <span className="text-[13px] w-2/3">Enjoy a blissful night&apos;s sleep in St Martin and wake up to paradise each morning.</span>
+                        <div className="flex justify-between xl:justify-end sm:justify-start">
+                            <span className="text-[13px] w-2/3 2xl:truncate 2xl:whitespace-normal 2xl:h-10 xl:hidden">Enjoy a blissful night&apos;s sleep in St Martin and wake up to paradise each morning.</span>
                             <button onClick={handleClick} className="text-sm rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30">
                                 Book Now
                             </button>

@@ -21,7 +21,7 @@ const DatePicker = ({ show, setShow, isHidden, setIsHidden }) => {
     const [focus, setFocus] = useState(null)
 
     const navbarTransition = useCallback(() => {
-        const x = width > 1279 ? 290 : width > 767 ? 312 : width > 639 ? 335 : 278
+        const x = width > 1279 ? 200 : width > 767 ? 215 : width > 639 ? 230 : 280
         if (window.scrollY > x) {
             setShow(true)
         } else {
@@ -37,18 +37,23 @@ const DatePicker = ({ show, setShow, isHidden, setIsHidden }) => {
     const [guests, setGuests] = useState('')
 
     const handleClick = () => {
+        let query = {}
+        query.arrival = datesRange.startDate ? moment(datesRange.startDate).format('DD-MM-YYYY') : undefined
+        query.departure = datesRange.endDate ? moment(datesRange.endDate).format('DD-MM-YYYY') : undefined
+        query.nights = datesRange.endDate?.diff(datesRange.startDate, 'days') || undefined
+        query.guests = guests || undefined
+
         router.push({
             pathname: '/booking',
-            query: {
-                arrival: moment(datesRange.startDate).format('DD-MM-YYYY'),
-                departure: moment(datesRange.endDate).format('DD-MM-YYYY'),
-                nights: datesRange.endDate.diff(datesRange.startDate, 'days'),
-                guests
-            }
+            query
         })
     }
 
-    return !isHidden ?
+    return isHidden && width < 639 ?
+        <div className="fixed top-0 right-2 bg-white px-1 rounded-b z-40" onClick={() => setIsHidden(false)}>
+            <ChevronDownIcon className="h-5 text-asphalt" />
+        </div>
+        :
         <div className={`w-full h-16 bg-white font-Sofia shadow flex items-center justify-between px-[2%] lg:flex-col lg:h-32 lg:px-[6%] md:h-[6.5rem] md:py-1 sm:h-44 sm:space-y-1.5 sm:py-2 ${show && 'fixed top-20 z-40 xl:top-16 md:top-12 sm:top-0'}`}>
             <div className="flex-1 flex items-center w-full gap-8 sm:flex-col sm:gap-1.5">
                 <div className="sm:self-start sm:flex-[1.5] flex items-center sm:w-full justify-between">
@@ -100,10 +105,7 @@ const DatePicker = ({ show, setShow, isHidden, setIsHidden }) => {
                 </div>
             </div>
         </div>
-        :
-        <div className="fixed top-0 right-2 bg-white px-1 rounded-b z-40" onClick={() => setIsHidden(false)}>
-            <ChevronDownIcon className="h-5 text-asphalt" />
-        </div>
+
 }
 
 export default DatePicker
