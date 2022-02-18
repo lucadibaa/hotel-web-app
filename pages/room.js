@@ -53,11 +53,11 @@ const RoomPage = () => {
                     <p className="w-3/4 text-center mx-auto font-light text-asphalt"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis quidem voluptatem facere similique cumque ducimus ut amet inventore, perspiciatis iusto quos corporis quo magni sint aperiam doloremque fugiat neque vel mollitia aspernatur, id ullam. Dolore consectetur qui repellendus maiores quidem quia numquam nemo quos est rem quibusdam perferendis eius esse dignissimos vitae autem.</p>
                 </section>
 
-                <section className="flex text-asphalt gap-32">
-                    <div className="flex-1 space-y-3">
+                <section className="flex text-asphalt gap-32 lg:gap-0 md:flex-col md:gap-10">
+                    <div className="flex-1 space-y-3 lg:flex-[1.8] md:flex-none">
                         <span className="text-xl tracking-wider border-b-2 border-ecru">ROOM DETAILS</span>
-                        <div className="flex items-start justify-between text-sm">
-                            <div className="space-y-2">
+                        <div className="flex items-start justify-between text-sm md:justify-start md:space-x-16 sm:flex-col sm:space-x-0 sm:space-y-2">
+                            <div className="space-y-3">
                                 <div className="flex items-center tracking-wide">
                                     <IoBedOutline className="text-2xl mr-2" />
                                     <span>{room.bed}</span>
@@ -87,7 +87,7 @@ const RoomPage = () => {
 
                     <div className="flex-1 space-y-3">
                         <span className="text-xl tracking-wider border-b-2 border-ecru">HIGHLIGHTS</span>
-                        <div className="flex items-start justify-between text-sm">
+                        <div className="flex items-start justify-between text-sm md:justify-start md:space-x-16 sm:flex-col sm:space-x-0 sm:space-y-3">
                             <div className="space-y-3">
                                 <div className="flex items-center tracking-wide">
                                     <GiBathtub className="text-2xl mr-2" />
