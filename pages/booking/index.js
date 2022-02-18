@@ -36,9 +36,10 @@ const Booking = () => {
     ]
 
     const router = useRouter()
-    const { arrival, departure, guests: qGuests } = router.query
+    const { arrival, departure, guests: qGuests, room } = router.query
 
     const [guests, setGuests] = useState(qGuests || '2')
+    const [searchInput, setSearchInput] = useState(room || '')
 
     const [datesRange, setDatesRange] = useState({
         startDate: arrival ? moment(toAmerican(arrival)) : moment(),
@@ -65,13 +66,13 @@ const Booking = () => {
                     </section>
 
                     <section className="bg-white h-16 border-b shadow-sm flex items-center justify-end space-x-10 pr-10 sm:px-2 sm:space-x-8">
-                        <Filters />
+                        <Filters searchInput={searchInput} setSearchInput={setSearchInput} />
                     </section>
 
                     <section className="pt-2 sm:pt-0.5">
                         <div className="flex flex-wrap gap-2">
                             {
-                                rooms.map(r => (
+                                rooms?.filter(r => r.name.toLowerCase().includes(searchInput.toLowerCase())).map(r => (
                                     <RoomCard key={r.price} name={r.name} img={r.img} bed={r.bed} guests={r.guests} breakfast={r.breakfast} sqmts={r.sqmts} price={r.price} selectedGuests={guests} datesRange={datesRange} />
                                 ))
                             }
