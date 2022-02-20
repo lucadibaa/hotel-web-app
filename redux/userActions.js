@@ -70,7 +70,6 @@ export const isTokenValid = () => {
     return async dispatch => {
 
         const isLoggedIn = localStorage.getItem('isLoggedIn')
-
         if (isLoggedIn) {
             try {
                 const res = await api.get(requests.getToken)

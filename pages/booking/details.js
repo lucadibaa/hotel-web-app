@@ -12,11 +12,13 @@ import { useRouter } from 'next/router'
 import InfoSection from "../../components/booking/InfoSection"
 import moment from "moment"
 import { toAmerican } from "../../utils/functions"
+import { useSelector } from "react-redux"
 
 const Details = () => {
 
     const router = useRouter()
     const { arrival, departure, nights, guests } = router.query
+    const { user } = useSelector(state => state.user)
 
     const handleClick = () => {
         router.replace({
@@ -69,35 +71,37 @@ const Details = () => {
                     validationSchema={bookingSchema}
                     onSubmit={values => handleSubmit(values)}
                 >
-                    <div className="flex-[3] lg:flex-none">
-                        <Form className="space-y-3">
+                    {({ values, setFieldValue }) => (
+                        <div className="flex-[3] lg:flex-none">
+                            <Form className="space-y-3">
 
-                            <section className="bg-white h-32 border-b shadow-sm">
-                                <h2 className="pl-5 py-1.5 text-2xl font-Sofia tracking-wide text-asphalt mb-2">Guest Details</h2>
-                                <Stepper active={2} />
-                            </section>
+                                <section className="bg-white h-32 border-b shadow-sm">
+                                    <h2 className="pl-5 py-1.5 text-2xl font-Sofia tracking-wide text-asphalt mb-2">Guest Details</h2>
+                                    <Stepper active={2} />
+                                </section>
 
-                            <ContactInfo />
+                                <ContactInfo setFieldValue={setFieldValue} />
 
-                            <CreateAccount />
+                                {Object.keys(user).length === 0 && <CreateAccount />}
 
-                            <Policies />
+                                <Policies />
 
-                            <PaymentOptions />
+                                <PaymentOptions />
 
-                            <Acknowledgement />
+                                <Acknowledgement />
 
-                            <section className="flex items-center justify-between">
-                                <button onClick={handleClick} type="button" className="text-sm rounded font-light tracking-wid text-jungle px-4 py-2 transition-all border border-jungle/30 hover:border-jungle/60 bg-white">
-                                    Previous Step
+                                <section className="flex items-center justify-between">
+                                    <button onClick={handleClick} type="button" className="text-sm rounded font-light tracking-wid text-jungle px-4 py-2 transition-all border border-jungle/30 hover:border-jungle/60 bg-white">
+                                        Previous Step
                                 </button>
-                                <button type="submit" className="text-sm rounded tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru hover:border-jungle/20 bg-ecru/40 hover:bg-ecru/90">
-                                    Complete Booking
-                                </button>
-                            </section>
+                                    <button type="submit" className="text-sm rounded tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru hover:border-jungle/20 bg-ecru/40 hover:bg-ecru/90">
+                                        Complete Booking
+                                    </button>
+                                </section>
 
-                        </Form>
-                    </div>
+                            </Form>
+                        </div>
+                    )}
                 </Formik>
 
                 {/* Right */}
