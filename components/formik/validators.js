@@ -12,3 +12,15 @@ export const bookingSchema = yup.object().shape({
     privacy: yup.bool().oneOf([true], 'Required'),
     booking: yup.bool().oneOf([true], 'Required'),
 })
+
+export const registerSchema = yup.object().shape({
+    firstName: yup.string().required('Required'),
+    lastName: yup.string().required('Required'),
+    email: yup.string().email('Invalid Email').required('Required'),
+    password: yup.string().min(6, 'Password must be at least 6 characters long').required('Required'),
+})
+
+export const loginSchema = yup.object().shape({
+    email: yup.string().email('Invalid Email').required('Required'),
+    password: yup.string().min(6, 'Password must be at least 6 characters long').required('Required'),
+})
