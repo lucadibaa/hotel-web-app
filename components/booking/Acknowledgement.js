@@ -1,4 +1,4 @@
-import CheckField from "../formik/CheckField"
+import CheckField from "../assets/formik/CheckField"
 
 const Acknowledgement = () => {
     return (

@@ -2,8 +2,8 @@ import { XIcon } from "@heroicons/react/solid"
 import { Form, Formik } from "formik"
 import { useDispatch } from "react-redux"
 import { register } from "../../redux/userActions"
-import TextField from "../formik/TextField"
-import { registerSchema } from "../formik/validators"
+import TextField from "../assets/formik/TextField"
+import { registerSchema } from "../assets/formik/validators"
 
 const Register = ({ isModalOpen, setIsModalOpen }) => {
 

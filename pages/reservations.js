@@ -1,28 +1,84 @@
 import Head from "next/head"
 import Layout from "../components/layout/Layout"
 import { useDispatch, useSelector } from "react-redux"
-import { logout, register } from "../redux/userActions"
+import { logout } from "../redux/userActions"
 import useWindowSize from "../utils/useWindowSize"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { ChevronDownIcon, ChevronUpIcon, SearchIcon } from "@heroicons/react/outline"
 import Register from "../components/reservations/Register"
 import Login from "../components/reservations/Login"
+import { useRouter } from "next/router"
+import api from "../api/axios"
+import requests from "../api/requests"
+import { useNotification } from '../components/assets/notifications/NotificationProvider'
 
-const Reservations = () => {
+export const getServerSideProps = async ({ query: { reservationId: id } }) => {
+    try {
+        const res = id && await api.get(`/reservations/${id}`)
+
+        return {
+            props: {
+                reservation: res?.data.reservation || null,
+            }
+        }
+    } catch (err) {
+        const error = err?.response?.data?.message
+        console.log(error)
+
+        return {
+            props: {
+                error: error,
+            }
+        }
+    }
+}
+
+const Reservations = ({ reservation, error }) => {
 
     const dispatch = useDispatch()
+    const dispatchNotification = useNotification()
 
     const { user } = useSelector(state => state.user)
+    const router = useRouter()
 
     const { width } = useWindowSize()
 
     const [isHidden, setIsHidden] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [search, setSearch] = useState('')
+    const [reservations, setReservations] = useState([])
 
     const handleSubmit = e => {
         e.preventDefault()
-        // call api + swallow routing
+        if (!search.match(/^[0-9a-fA-F]{24}$/)) return
+        router.replace({
+            pathname: '/reservations',
+            query: {
+                reservationId: search
+            }
+        })
     }
+
+    useEffect(() => {
+        const getReservationsByUserId = async () => {
+            try {
+                const res = await api.get(requests.getReservationsByUserId)
+                setReservations(res?.data.reservations)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        Object.entries(user).length > 0 && getReservationsByUserId()
+    }, [user])
+
+    const data = {
+        nights: 0,
+        total: 0
+    }
+    reservations?.forEach(r => {
+        data.nights += r.nights
+        data.total += r.total
+    })
 
     return (
         <Layout noBanner>
@@ -38,20 +94,35 @@ const Reservations = () => {
                             <div>
                                 <h2 className="text-2xl text-left mt-14 mb-6 font-Sofia tracking-wider font-light text-asphalt uppercase lg:mt-10 lg:mb-4 md:my-3">Your Reservations</h2>
                                 <div>
-                                    {/* reservations list */}
+                                    {
+                                        reservations?.map(r => (
+                                            <div key={r._id}>
+                                                {r._id}
+                                            </div>
+                                        ))
+                                    }
                                 </div>
                             </div>
                             :
                             <div>
                                 <h2 className="text-2xl text-left mt-14 mb-6 font-Sofia tracking-wider font-light text-asphalt uppercase lg:mt-10 lg:mb-4 md:my-3">Find Your Reservation</h2>
                                 <form className="relative" onSubmit={handleSubmit}>
-                                    <input className="text-gray-600 focus:outline-none focus:border focus:border-ecru w-full h-10 pl-2 border border-gray-300 rounded text-sm" type="text" placeholder="Enter your reservation id" />
+                                    <input className="text-gray-600 focus:outline-none focus:border focus:border-ecru w-full h-10 pl-2 border border-gray-300 rounded text-sm" type="text" placeholder="Enter your reservation id" onChange={e => setSearch(e.target.value)} value={search} />
                                     <button type="submit" className="px-1.5 text-asphalt absolute right-1.5 top-0 bottom-0 m-auto cursor-pointer">
                                         <SearchIcon className="h-5" />
                                     </button>
                                 </form>
                                 <div>
-                                    {/* reservation box */}
+                                    {
+                                        reservation ?
+                                            <div>
+                                                {reservation?._id}
+                                            </div>
+                                            :
+                                            <div>
+                                                no reservation match that id
+                                            </div>
+                                    }
                                 </div>
                             </div>
                     }
@@ -103,15 +174,15 @@ const Reservations = () => {
                                                 <div className="space-y-1">
                                                     <div className="flex justify-between text-sm font-light">
                                                         <span>Number of reservations:</span>
-                                                        <span>3</span>
+                                                        <span>{reservations?.length}</span>
                                                     </div>
                                                     <div className="flex justify-between text-sm font-light">
                                                         <span>Nights spent at the hotel:</span>
-                                                        <span>12</span>
+                                                        <span>{data.nights}</span>
                                                     </div>
                                                     <div className="flex justify-between text-sm font-light">
                                                         <span>Total spent:</span>
-                                                        <span>859 €</span>
+                                                        <span>{data.total} €</span>
                                                     </div>
                                                 </div>
                                             </section>

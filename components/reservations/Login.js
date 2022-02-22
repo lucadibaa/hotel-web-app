@@ -2,7 +2,7 @@ import { XIcon } from "@heroicons/react/solid"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { login } from "../../redux/userActions"
-import TextField from "../formik/TextField"
+import TextField from "../assets/formik/TextField"
 
 const Login = ({ isModalOpen, setIsModalOpen, noRegister }) => {
 
@@ -60,10 +60,10 @@ const Login = ({ isModalOpen, setIsModalOpen, noRegister }) => {
                 <div className="space-y-4 text-asphalt bg-base px-4 flex flex-col py-3 justify-center">
                     <div className="flex flex-wrap -mx-2 md:space-y-4 space-y-0 pb-2">
                         <div className="md:w-full px-2 w-1/2">
-                            <TextField onChange={e => handleInput(e)} value={_email} error={dataErrors?._email} inputClasses={inputStyle} labelClasses={labelStyle} label="Email" name="_email" type="email" customform={true} />
+                            <TextField onChange={e => handleInput(e)} value={_email} error={dataErrors?._email} inputClasses={inputStyle} labelClasses={labelStyle} label="Email" name="_email" type="email" customform={'true'} />
                         </div>
                         <div className="md:w-full px-2 w-1/2">
-                            <TextField onChange={e => handleInput(e)} value={_password} error={dataErrors?._password} inputClasses={inputStyle} labelClasses={labelStyle} label="Password" name="_password" type="password" customform={true} />
+                            <TextField onChange={e => handleInput(e)} value={_password} error={dataErrors?._password} inputClasses={inputStyle} labelClasses={labelStyle} label="Password" name="_password" type="password" customform={'true'} />
                         </div>
                     </div>
                     <div className={`flex ${noRegister ? 'justify-end' : 'justify-between'}`}>

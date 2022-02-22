@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import { Provider } from 'react-redux'
+import NotificationProvider from '../components/assets/notifications/NotificationProvider'
 import store from '../redux/store'
 import { useEffect } from 'react'
 import { isTokenValid } from '../redux/userActions'
@@ -12,7 +13,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
+      <NotificationProvider>
+        <Component {...pageProps} />
+      </NotificationProvider>
     </Provider>
   )
 }

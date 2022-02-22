@@ -1,5 +1,5 @@
 import { InformationCircleIcon } from "@heroicons/react/outline"
-import TextField from "../formik/TextField"
+import TextField from "../assets/formik/TextField"
 
 const CreateAccount = () => {
 

@@ -1,10 +1,9 @@
 import Image from "next/image"
 import { useState } from "react"
 import { useSelector } from "react-redux"
-import TextArea from "../formik/TextArea"
-import TextField from "../formik/TextField"
+import TextArea from "../assets/formik/TextArea"
+import TextField from "../assets/formik/TextField"
 import Login from "../reservations/Login"
-import Register from "../reservations/Register"
 
 const ContactInfo = ({ setFieldValue }) => {
 

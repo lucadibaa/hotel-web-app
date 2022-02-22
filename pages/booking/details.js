@@ -2,7 +2,7 @@ import { Form, Formik } from "formik"
 import Head from "next/head"
 import Stepper from "../../components/booking/Stepper"
 import Layout from "../../components/layout/Layout"
-import { bookingSchema } from "../../components/formik/validators"
+import { bookingSchema } from "../../components/assets/formik/validators"
 import ContactInfo from "../../components/booking/ContactInfo"
 import CreateAccount from "../../components/booking/CreateAccount"
 import Policies from "../../components/booking/Policies"
@@ -13,6 +13,8 @@ import InfoSection from "../../components/booking/InfoSection"
 import moment from "moment"
 import { toAmerican } from "../../utils/functions"
 import { useSelector } from "react-redux"
+import api from "../../api/axios"
+import requests from "../../api/requests"
 
 const Details = () => {
 
@@ -32,14 +34,20 @@ const Details = () => {
         })
     }
 
-    const handleSubmit = values => {
+    const handleSubmit = async values => {
         console.log(values)
+        // add roomSlug to values
 
         if (values.password) {
             // dispatch register
         }
 
         if (values.payment === 'hotel') {
+            try {
+                // const res = await api.post(requests.generateReservation, values)
+            } catch (err) {
+
+            }
             router.push('confirmation')
         } else {
             // redirect to stripe payment

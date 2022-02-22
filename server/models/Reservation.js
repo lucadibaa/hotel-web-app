@@ -2,11 +2,11 @@ import { Schema, models, model } from 'mongoose'
 
 const reservationSchema = new Schema({
     arrival: {
-        type: Date,
+        type: String,
         required: true,
     },
     departure: {
-        type: Date,
+        type: String,
         required: true,
     },
     nights: {
@@ -17,23 +17,25 @@ const reservationSchema = new Schema({
         type: Schema.Types.ObjectId, ref: 'User'
     },
     guest: {
-        type: String,
-        required: () => !this.guestId,
+        firstName: { type: String },
+        lastName: { type: String },
+        email: { type: String },
     },
     guestsNumber: {
         type: Number,
         required: true,
     },
     payment: {
-        enum: ['hotel', 'online'],
+        type: String,
         required: true,
     },
-    price: {
+    total: {
         type: Number,
         required: true,
     },
-    roomId: {
-        type: Schema.Types.ObjectId, ref: 'Room'
+    roomSlug: {
+        type: String,
+        required: true
     }
 }, { timestamps: true })
 
