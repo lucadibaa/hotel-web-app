@@ -1,11 +1,12 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline"
 import moment from "moment"
 import { useState } from "react"
+import { useSelector } from "react-redux"
 import useWindowSize from '../../utils/useWindowSize'
 
 const InfoSection = ({ startDate, endDate, guests }) => {
 
-    const room = { price: 80 }
+    const { room } = useSelector(state => state.booking)
 
     const { width } = useWindowSize()
 
@@ -60,12 +61,12 @@ const InfoSection = ({ startDate, endDate, guests }) => {
                             <div className="space-y-1">
                                 <div className="flex justify-between text-[13px] font-light xl:flex-col xl:leading-3 lg:leading-normal lg:flex-row">
                                     <span>Room:</span>
-                                    <span className="border-b border-moss cursor-pointer xl:self-end xl:mb-1 lg:mb-0">Historic Garden Room</span>
+                                    <span className="border-b border-moss cursor-pointer xl:self-end xl:mb-1 lg:mb-0">{room?.name}</span>
                                 </div>
                                 <div className="flex justify-between text-[13px] font-light">
                                     <span>Room Rate:</span>
                                     <div className="flex flex-col items-end">
-                                        <span>€ {room.price}</span>
+                                        <span>€ {room?.price}</span>
                                         <span className="text-[10px]">per night</span>
                                     </div>
                                 </div>
@@ -78,7 +79,7 @@ const InfoSection = ({ startDate, endDate, guests }) => {
                     <section className="px-5 mb-5 sm:mb-2">
                         <div className="flex justify-between text-lg xl:text-base">
                             <span>TOTAL:</span>
-                            <span>€ {room.price * endDate?.diff(startDate, 'days') || '0.00'}</span>
+                            <span>€ {room?.price * endDate?.diff(startDate, 'days') || '0.00'}</span>
                         </div>
                     </section>
                 </>

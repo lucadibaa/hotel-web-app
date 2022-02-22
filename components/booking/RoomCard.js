@@ -5,15 +5,23 @@ import { IoBedOutline } from 'react-icons/io5'
 import { MdCoffeeMaker, MdPets } from 'react-icons/md'
 import { useRouter } from "next/router"
 import moment from "moment"
+import { selectRoom, selectArrival, selectDeparture, calcTotal } from "../../redux/bookingSlice"
+import { useDispatch, useSelector } from "react-redux"
 
-const RoomCard = ({ name, img, bed, guests, breakfast, sqmts, price, selectedGuests, datesRange }) => {
+const RoomCard = ({ room, name, img, bed, guests, breakfast, sqmts, price, selectedGuests, datesRange }) => {
 
     const router = useRouter()
+    const dispatch = useDispatch()
+    const { room: selectedRoom } = useSelector(state => state.booking)
 
     const { startDate, endDate } = datesRange
 
     const handleClick = () => {
         if (startDate && endDate && selectedGuests) {
+            dispatch(selectArrival(moment(startDate).format('YYYY-MM-DD')))
+            dispatch(selectDeparture(moment(endDate).format('YYYY-MM-DD')))
+            dispatch(selectRoom(room))
+            dispatch(calcTotal(endDate?.diff(startDate, 'days')))
             router.push({
                 pathname: '/booking/details',
                 query: {
@@ -115,7 +123,7 @@ const RoomCard = ({ name, img, bed, guests, breakfast, sqmts, price, selectedGue
                         <div className="flex justify-between xl:justify-end sm:justify-start">
                             <span className="text-[13px] w-2/3 2xl:truncate 2xl:whitespace-normal 2xl:h-10 xl:hidden">Enjoy a blissful night&apos;s sleep in St Martin and wake up to paradise each morning.</span>
                             <button onClick={handleClick} className="text-sm rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30">
-                                Book Now
+                                {selectedRoom?._id === room._id ? 'Keep Room' : 'Book Now'}
                             </button>
                         </div>
                     </div>

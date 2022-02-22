@@ -1,6 +1,7 @@
 import dbConnect from '../../../server/dbConnect'
 import Reservation from '../../../server/models/Reservation'
 import User from '../../../server/models/User'
+import { toAmerican } from '../../../utils/functions'
 
 export default async (req, res) => {
     const { method } = req
@@ -19,7 +20,7 @@ export default async (req, res) => {
 
 const generate = async (req, res) => {
     try {
-        const { firstName, lastName, email, arrival, departure, nights, guestsNumber, payment, total, room } = req.body
+        const { firstName, lastName, email, arrival, departure, nights, guests, payment, total, roomSlug } = req.body
 
 
         const user = await User.findOne({ email })
@@ -34,7 +35,7 @@ const generate = async (req, res) => {
             }
         }
 
-        const newReservation = new Reservation({ arrival, departure, nights, guestId, guest, guestsNumber, payment, total }) // room
+        const newReservation = new Reservation({ arrival: toAmerican(arrival), departure: toAmerican(departure), nights, guestId, guest, guestsNumber: guests, payment, total, roomSlug })
 
         await newReservation.save((err, newReservation) => {
             if (err) return res.status(400).json({ err });

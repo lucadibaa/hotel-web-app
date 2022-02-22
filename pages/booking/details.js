@@ -15,12 +15,16 @@ import { toAmerican } from "../../utils/functions"
 import { useSelector } from "react-redux"
 import api from "../../api/axios"
 import requests from "../../api/requests"
+import { useNotification } from "../../components/assets/notifications/NotificationProvider"
 
 const Details = () => {
+
+    const dispatchNotification = useNotification()
 
     const router = useRouter()
     const { arrival, departure, nights, guests } = router.query
     const { user } = useSelector(state => state.user)
+    const { room, total } = useSelector(state => state.booking)
 
     const handleClick = () => {
         router.replace({
@@ -35,22 +39,22 @@ const Details = () => {
     }
 
     const handleSubmit = async values => {
-        console.log(values)
-        // add roomSlug to values
-
         if (values.password) {
             // dispatch register
+            dispatchNotification({ type: 'SUCCESS', message: 'User registered successfully' })
         }
 
-        if (values.payment === 'hotel') {
-            try {
-                // const res = await api.post(requests.generateReservation, values)
-            } catch (err) {
+        try {
+            await api.post(requests.generateReservation, { ...values, ...router.query, total, arrival: toAmerican(arrival), departure: toAmerican(departure), roomSlug: room.slug })
+            dispatchNotification({ type: 'SUCCESS', message: 'Reservation successfully created' })
 
+            if (values.payment === 'hotel') {
+                router.push('confirmation')
+            } else {
+                // redirect to stripe payment
             }
-            router.push('confirmation')
-        } else {
-            // redirect to stripe payment
+        } catch (err) {
+            dispatchNotification({ type: 'ERROR', message: err.message })
         }
     }
 

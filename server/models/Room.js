@@ -19,10 +19,6 @@ const roomSchema = new Schema({
         type: Number,
         required: true
     },
-    info: {
-        type: Object,
-        required: true
-    },
     discount: {
         type: Number,
         default: 0
@@ -31,6 +27,10 @@ const roomSchema = new Schema({
         type: String,
         enum: ['standard', 'superior', 'suite'],
         required: true,
+    },
+    info: {
+        type: Object,
+        required: true
     },
     reviews: [{
         text: {
