@@ -4,40 +4,63 @@ import GuestsDatesSelector from "../../components/booking/GuestsDatesSelector"
 import Stepper from "../../components/booking/Stepper"
 import Filters from "../../components/booking/Filters"
 import RoomCard from "../../components/booking/RoomCard"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import moment from "moment"
 import { useRouter } from "next/router"
 import { toAmerican } from "../../utils/functions"
 import InfoSection from "../../components/booking/InfoSection"
+import api from "../../api/axios"
 
-const Booking = () => {
+export const getServerSideProps = async ({ query: { arrival, departure } }) => {
 
-    const rooms = [
-        {
-            _id: 1,
-            name: 'Historic Garden Room',
-            img: 'https://res.cloudinary.com/drpbnvds9/image/upload/v1643291972/hotel%20web%20app/rooms%20list/banner_gpixcx.jpg',
-            bed: 'Double Bed',
-            guests: 'For Couples | Up to 2 Guests',
-            breakfast: true,
-            sqmts: '24',
-            ratings: '4.5',
-            slug: 'Historic Garden Room'.toLowerCase().replaceAll(' ', '-'),
-            price: '80'
-        },
-        {
-            _id: 2,
-            name: 'Historic Ocean Room',
-            img: 'https://res.cloudinary.com/drpbnvds9/image/upload/v1643824852/hotel%20web%20app/rooms%20list/historic-ocean_xntkek.jpg',
-            bed: '2 Double Beds',
-            guests: 'Up to 4 Guests',
-            breakfast: false,
-            ratings: '4.8',
-            sqmts: '35',
-            slug: 'Historic Ocean Room'.toLowerCase().replaceAll(' ', '-'),
-            price: '130'
-        },
-    ]
+    try {
+        const res = await api.get(`/rooms/availables?arrival=${arrival}&departure=${departure}`)
+
+        return {
+            props: {
+                rooms: res.data?.availableRooms
+            }
+        }
+    } catch (err) {
+        const error = err?.response?.data?.message
+        console.log(error)
+
+        return {
+            props: {
+                error
+            }
+        }
+    }
+}
+
+const Booking = ({ rooms }) => {
+
+    // const rooms = [
+    //     {
+    //         _id: 1,
+    //         name: 'Historic Garden Room',
+    //         img: 'https://res.cloudinary.com/drpbnvds9/image/upload/v1643291972/hotel%20web%20app/rooms%20list/banner_gpixcx.jpg',
+    //         bed: 'Double Bed',
+    //         guests: 'For Couples | Up to 2 Guests',
+    //         breakfast: true,
+    //         sqmts: '24',
+    //         ratings: '4.5',
+    //         slug: 'historic-garden-room',
+    //         price: '80'
+    //     },
+    //     {
+    //         _id: 2,
+    //         name: 'Historic Ocean Room',
+    //         img: 'https://res.cloudinary.com/drpbnvds9/image/upload/v1643824852/hotel%20web%20app/rooms%20list/historic-ocean_xntkek.jpg',
+    //         bed: '2 Double Beds',
+    //         guests: 'Up to 4 Guests',
+    //         breakfast: false,
+    //         ratings: '4.8',
+    //         sqmts: '35',
+    //         slug: 'historic-ocean-room',
+    //         price: '130'
+    //     },
+    // ]
 
     const router = useRouter()
     const { arrival, departure, guests: qGuests, room } = router.query
@@ -49,6 +72,17 @@ const Booking = () => {
         startDate: arrival ? moment(toAmerican(arrival)) : moment(),
         endDate: departure ? moment(toAmerican(departure)) : moment().add(2, 'days')
     })
+
+    useEffect(() => {
+        // if (moment(datesRange.startDate).format('DD-MM-YYYY').isValid() && moment(datesRange.endDate).format('DD-MM-YYYY').isValid())
+        router.replace({
+            pathname: '/booking',
+            query: {
+                arrival: moment(datesRange.startDate).format('DD-MM-YYYY'),
+                departure: moment(datesRange.endDate).format('DD-MM-YYYY'),
+            }
+        })
+    }, [datesRange])
 
     return (
         <Layout noBanner>
@@ -77,7 +111,7 @@ const Booking = () => {
                         <div className="flex flex-wrap gap-2">
                             {
                                 rooms?.filter(r => r.name.toLowerCase().includes(searchInput.toLowerCase())).map(r => (
-                                    <RoomCard key={r.price} room={r} name={r.name} img={r.img} bed={r.bed} guests={r.guests} breakfast={r.breakfast} sqmts={r.sqmts} price={r.price} selectedGuests={guests} datesRange={datesRange} />
+                                    <RoomCard key={r.price} room={r} name={r.name} img={r.image} bed={r.bed} guests={r.guests} breakfast={r.breakfast} sqmts={r.sqmts} price={r.price} selectedGuests={guests} datesRange={datesRange} />
                                 ))
                             }
                         </div>

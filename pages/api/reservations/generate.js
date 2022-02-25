@@ -1,3 +1,4 @@
+import moment from 'moment'
 import dbConnect from '../../../server/dbConnect'
 import Reservation from '../../../server/models/Reservation'
 import User from '../../../server/models/User'
@@ -35,7 +36,7 @@ const generate = async (req, res) => {
             }
         }
 
-        const newReservation = new Reservation({ arrival: toAmerican(arrival), departure: toAmerican(departure), nights, guestId, guest, guestsNumber: guests, payment, total, roomSlug })
+        const newReservation = new Reservation({ arrival: moment(toAmerican(arrival)), departure: moment(toAmerican(departure)), nights, guestId, guest, guestsNumber: guests, payment, total, roomSlug })
 
         await newReservation.save((err, newReservation) => {
             if (err) return res.status(400).json({ err });

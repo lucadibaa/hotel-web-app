@@ -6,12 +6,21 @@ const roomSchema = new Schema({
         trim: true,
         required: [true, 'Insert the room name'],
     },
+    slug: {
+        type: String,
+        unique: true,
+        required: true,
+    },
     description: {
         type: String,
         trim: true,
         required: [true, 'Insert the room description'],
     },
     image: {
+        type: String,
+        required: true,
+    },
+    guests: {
         type: String,
         required: true,
     },

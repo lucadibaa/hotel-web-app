@@ -45,7 +45,7 @@ const Details = () => {
         }
 
         try {
-            await api.post(requests.generateReservation, { ...values, ...router.query, total, arrival: toAmerican(arrival), departure: toAmerican(departure), roomSlug: room.slug })
+            await api.post(requests.generateReservation, { ...values, ...router.query, total, arrival, departure, roomSlug: room.slug })
             dispatchNotification({ type: 'SUCCESS', message: 'Reservation successfully created' })
 
             if (values.payment === 'hotel') {

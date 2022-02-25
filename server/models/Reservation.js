@@ -2,11 +2,11 @@ import { Schema, models, model } from 'mongoose'
 
 const reservationSchema = new Schema({
     arrival: {
-        type: String,
+        type: Date,
         required: true,
     },
     departure: {
-        type: String,
+        type: Date,
         required: true,
     },
     nights: {
