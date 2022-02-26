@@ -21,8 +21,14 @@ export const bookingSlice = createSlice({
         calcTotal: (state, { payload }) => {
             state.total = state.room?.price * payload || null
         },
+        clear: (state) => {
+            state.total = null
+            state.arrival = null
+            state.room = null
+            state.departure = null
+        },
     }
 })
 
-export const { selectRoom, selectArrival, selectDeparture, calcTotal } = bookingSlice.actions
+export const { selectRoom, selectArrival, selectDeparture, calcTotal, clear } = bookingSlice.actions
 export default bookingSlice.reducer

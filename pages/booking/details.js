@@ -12,15 +12,17 @@ import { useRouter } from 'next/router'
 import InfoSection from "../../components/booking/InfoSection"
 import moment from "moment"
 import { toAmerican } from "../../utils/functions"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import api from "../../api/axios"
 import requests from "../../api/requests"
 import { useNotification } from "../../components/assets/notifications/NotificationProvider"
+import { clear } from "../../redux/bookingSlice"
 
 const Details = () => {
 
     const dispatchNotification = useNotification()
 
+    const dispatch = useDispatch()
     const router = useRouter()
     const { arrival, departure, nights, guests } = router.query
     const { user } = useSelector(state => state.user)
@@ -47,6 +49,7 @@ const Details = () => {
         try {
             await api.post(requests.generateReservation, { ...values, ...router.query, total, arrival, departure, roomSlug: room.slug })
             dispatchNotification({ type: 'SUCCESS', message: 'Reservation successfully created' })
+            dispatch(clear())
 
             if (values.payment === 'hotel') {
                 router.push('confirmation')
@@ -54,7 +57,7 @@ const Details = () => {
                 // redirect to stripe payment
             }
         } catch (err) {
-            dispatchNotification({ type: 'ERROR', message: err.message })
+            dispatchNotification({ type: 'ERROR', message: `${err.message} Please try again Later.` })
         }
     }
 

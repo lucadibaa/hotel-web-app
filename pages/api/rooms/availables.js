@@ -21,16 +21,16 @@ const getAvailableRooms = async (req, res) => {
 
     try {
         const reservations = await Reservation.find({
-            $or: [
-                { departure: { $lte: moment(toAmerican(arrival)).toDate() } },
-                { arrival: { $gte: moment(toAmerican(departure)).toDate() } },
+            $and: [
+                { arrival: { $lt: moment(toAmerican(departure)).toDate() } },
+                { departure: { $gt: moment(toAmerican(arrival)).toDate() } },
             ]
         })
 
         const rooms = await Room.find()
 
         const availableRooms = rooms?.filter(room => {
-            return reservations?.find(r => room.slug === r.roomSlug)
+            return !reservations?.some(r => r.roomSlug === room.slug)
         })
 
         res.status(200).json({ success: true, availableRooms })

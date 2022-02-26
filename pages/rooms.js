@@ -51,7 +51,7 @@ const Rooms = ({ rooms, error }) => {
                     <div className="flex flex-wrap gap-4 xl:gap-3 lg:gap-2">
                         {
                             rooms?.filter(r => r.type === 'standard').map(r => (
-                                <StandardRoomCard key={r.price} name={r.name} img={r.image} guests={r.guests} price={r.price} info={r.info} />
+                                <StandardRoomCard key={r._id} name={r.name} img={r.image} guests={r.guests} price={r.price} info={r.info} />
                             ))
                         }
                     </div>
@@ -63,7 +63,7 @@ const Rooms = ({ rooms, error }) => {
                     <div className="flex flex-wrap gap-x-6 gap-y-24 mt-52 lg:mt-32 lg:gap-x-3 md:mt-20 sm:mt-5 sm:gap-x-0 sm:gap-y-4">
                         {
                             rooms?.filter(r => r.type === 'superior').map(r => (
-                                <SuperiorRoomCard key={r.price} name={r.name} img={r.image} guests={r.guests} price={r.price} info={r.info} />
+                                <SuperiorRoomCard key={r._id} name={r.name} img={r.image} guests={r.guests} price={r.price} info={r.info} />
                             ))
                         }
                     </div>
@@ -75,7 +75,7 @@ const Rooms = ({ rooms, error }) => {
                     <div className="flex flex-wrap gap-20 lg:gap-16 sm:gap-64 sm:mb-52">
                         {
                             rooms?.filter(r => r.type === 'suite').map(r => (
-                                <SuiteCard key={r.price} name={r.name} img={r.image} guests={r.guests} price={r.price} info={r.info} />
+                                <SuiteCard key={r._id} name={r.name} img={r.image} guests={r.guests} price={r.price} info={r.info} />
                             ))
                         }
                     </div>
