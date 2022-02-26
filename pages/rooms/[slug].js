@@ -1,26 +1,37 @@
 import Head from "next/head"
 import Image from "next/image"
-import Layout from "../components/layout/Layout"
+import Layout from "../../components/layout/Layout"
 import { TemplateIcon, UsersIcon } from '@heroicons/react/outline'
 import { GiBathtub, GiForkKnifeSpoon } from 'react-icons/gi'
 import { IoBedOutline, IoTvOutline } from 'react-icons/io5'
 import { MdCoffeeMaker, MdPets } from 'react-icons/md'
 import { useRouter } from "next/router"
+import api from "../../api/axios"
 
-const RoomPage = () => {
+export const getServerSideProps = async ({ params: { slug } }) => {
+    try {
+        const res = await api.get(`/rooms/${slug}`)
+
+        return {
+            props: {
+                room: res?.data.room || {},
+            }
+        }
+    } catch (err) {
+        const error = err?.response?.data?.message
+        console.log(error)
+
+        return {
+            props: {
+                error
+            }
+        }
+    }
+}
+
+const RoomPage = ({ room: { name, image, guests, price, info }, error }) => {
 
     const router = useRouter()
-
-    const room = {
-        name: 'Historic Garden Room',
-        img: 'https://res.cloudinary.com/drpbnvds9/image/upload/v1643291972/hotel%20web%20app/rooms%20list/banner_gpixcx.jpg',
-        bed: 'Double Bed',
-        guests: 'Perfect for Couples',
-        breakfast: true,
-        sqmts: '24',
-        ratings: '4.5',
-        price: '80'
-    }
 
     const handleClick = () => {
         router.push({
@@ -34,13 +45,13 @@ const RoomPage = () => {
     return (
         <Layout>
             <Head>
-                <title>Gold Arc Hotel | {room.name}</title>
+                <title>Gold Arc Hotel | {name}</title>
             </Head>
 
             <section>
                 <div className="relative w-screen h-[89vh] overflow-hidden">
-                    <Image src={room.img}
-                        alt={room.name}
+                    <Image src={image}
+                        alt={name}
                         layout="fill"
                         objectFit="cover"
                     />
@@ -49,7 +60,7 @@ const RoomPage = () => {
 
             <main className="mt-8 max-w-[90%] mx-auto space-y-24 pb-20">
                 <section className="space-y-10">
-                    <h2 className="font-PlayfairDisplay text-center text-3xl font-medium uppercase italic tracking-wider text-camel">{room.name}</h2>
+                    <h2 className="font-PlayfairDisplay text-center text-3xl font-medium uppercase italic tracking-wider text-camel">{name}</h2>
                     <p className="w-3/4 text-center mx-auto font-light text-asphalt"> Lorem ipsum dolor sit, amet consectetur adipisicing elit. Debitis quidem voluptatem facere similique cumque ducimus ut amet inventore, perspiciatis iusto quos corporis quo magni sint aperiam doloremque fugiat neque vel mollitia aspernatur, id ullam. Dolore consectetur qui repellendus maiores quidem quia numquam nemo quos est rem quibusdam perferendis eius esse dignissimos vitae autem.</p>
                 </section>
 
@@ -60,17 +71,17 @@ const RoomPage = () => {
                             <div className="space-y-3">
                                 <div className="flex items-center tracking-wide">
                                     <IoBedOutline className="text-2xl mr-2" />
-                                    <span>{room.bed}</span>
+                                    <span>{info?.bed}</span>
                                 </div>
                                 <div className="flex items-center tracking-wide">
                                     <UsersIcon className="h-6 mr-2" />
-                                    <span>{room.guests}</span>
+                                    <span>{guests}</span>
                                 </div>
                                 <div className="flex items-center tracking-wide">
                                     <TemplateIcon className="h-6 mr-2" />
-                                    <span>{room.sqmts} sqm</span>
+                                    <span>{info?.sqmts} sqm</span>
                                 </div>
-                                <div className="flex items-center tracking-wide">
+                                <div className={`flex items-center tracking-wide ${!info?.pets && 'hidden'}`}>
                                     <MdPets className="text-2xl mr-2" />
                                     <span>Pets allowed</span>
                                 </div>
@@ -89,17 +100,14 @@ const RoomPage = () => {
                         <span className="text-xl tracking-wider border-b-2 border-ecru">HIGHLIGHTS</span>
                         <div className="flex items-start justify-between text-sm md:justify-start md:space-x-16 sm:flex-col sm:space-x-0 sm:space-y-3">
                             <div className="space-y-3">
-                                <div className="flex items-center tracking-wide">
+                                <div className={`flex items-center tracking-wide ${!info?.bathtub && 'hidden'}`}>
                                     <GiBathtub className="text-2xl mr-2" />
                                     <span>Marble bathroom with bathtub</span>
                                 </div>
-                                {
-                                    room.breakfast &&
-                                    <div className="flex items-center tracking-wide">
-                                        <GiForkKnifeSpoon className="text-2xl mr-2" />
-                                        <span>Breakfast Included</span>
-                                    </div>
-                                }
+                                <div className={`flex items-center tracking-wide ${!info?.breakfast && 'hidden'}`}>
+                                    <GiForkKnifeSpoon className="text-2xl mr-2" />
+                                    <span>Breakfast Included</span>
+                                </div>
                                 <div className="flex items-center tracking-wide">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 mr-2" viewBox="0 0 40 40">
                                         <path fill="none" stroke="#000000" strokeWidth="1.002" strokeLinecap="round" strokeLinejoin="round" strokeMiterlimit="10" d="M9.4 10.2h21v21.2h-21zm-7-1.8l6.9 1.7v21.4l-6.9 1.7zm3.5 23.7V9.4M9.3 26l-6.9 1.1m6.9-6.5H2.4m6.9-5.5l-6.9-.9m34.9 19l-7-1.8V10.1l7-1.8zM33.8 9.4v22.7m-3.5-16.6l7-1.1m-7 6.6l7-.1m-7 5.5l7 .9"></path>
@@ -108,9 +116,9 @@ const RoomPage = () => {
                                             <path d="M28.6 25.7l-5.7-6-1.5 1.5 4.5 4.5h-1.4l-6.4-6.6-6.7 6.6"></path>
                                         </g>
                                     </svg>
-                                    <span>Ocean View</span>
+                                    <span>{info?.view}</span>
                                 </div>
-                                <div className="flex items-center tracking-wide">
+                                <div className={`flex items-center tracking-wide ${!info?.coffeeMachine && 'hidden'}`}>
                                     <MdCoffeeMaker className="text-2xl mr-2" />
                                     <span>Espresso Coffee Machine</span>
                                 </div>
@@ -126,7 +134,7 @@ const RoomPage = () => {
                     <div className="flex flex-col space-y-2">
                         <span className="text-lg tracking-wider border-b border-ecru">ROOM RATE</span>
                         <div className="flex flex-col text-lg">
-                            <span>€ {room.price}</span>
+                            <span>€ {price}</span>
                             <span className="text-xs font-light mb-0.5">per night</span>
                             <span className="text-xs font-light">Including Taxes & Fees</span>
                         </div>

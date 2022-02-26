@@ -86,9 +86,9 @@ const Reservations = ({ reservation, error }) => {
                 <title>Gold Arc Hotel | Reservations</title>
             </Head>
 
-            <main className="mt-24 max-w-[90%] mx-auto h-[calc(60vh-6rem)] flex justify-between pb-10">
+            <main className="mt-24 max-w-[90%] mx-auto min-h-[60vh] flex justify-between pb-10 sm:mt-0 sm:pt-4 sm:flex-col-reverse">
 
-                <section className="w-1/3">
+                <section className="w-1/3 sm:w-full">
                     {
                         Object.keys(user).length > 0 ?
                             <div>
@@ -132,9 +132,9 @@ const Reservations = ({ reservation, error }) => {
                     {
                         Object.keys(user).length > 0 ?
                             <>
-                                <div className={`h-auto pb-5 mb-3 bg-camel/30 rounded-sm w-80 lg:w-2/3 lg:mx-auto sm:w-11/12 ${isHidden && width < 639 && 'h-10'}`}>
+                                <div className={`h-auto pb-5 mb-3 bg-camel/30 rounded-sm w-80 lg:w-2/3 lg:mx-auto sm:w-11/12 ${isHidden && width < 639 && 'h-10 pb-0'}`}>
                                     <section>
-                                        <div className={`flex justify-between items-end ${isHidden && width < 639 && 'pb-3'}`}>
+                                        <div className={`flex justify-between items-end pb-3`}>
                                             <h2 className={`pl-5 pt-3 text-lg font-Sofia tracking-wider text-asphalt xl:text-base`}>PROFILE INFO</h2>
                                             <div className={`hidden sm:block`} onClick={() => setIsHidden(!isHidden)}>
                                                 {
@@ -189,7 +189,7 @@ const Reservations = ({ reservation, error }) => {
                                         </>
                                     }
                                 </div>
-                                <div className="w-full flex justify-end">
+                                <div className="w-full flex justify-end sm:pr-3">
                                     <button onClick={() => dispatch(logout())} className="text-sm rounded font-light tracking-wider px-3.5 py-2 transition-all border border-gray-700/30 hover:border-gray-700/50 bg-gray-300/20 hover:bg-gray-300/40">
                                         Logout
                                     </button>

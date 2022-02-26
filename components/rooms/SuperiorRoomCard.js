@@ -4,9 +4,9 @@ import { GiForkKnifeSpoon } from 'react-icons/gi'
 import { IoBedOutline } from 'react-icons/io5'
 import Link from "next/link"
 
-const SuperiorRoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price }) => {
+const SuperiorRoomCard = ({ name, slug, img, guests, price, info }) => {
     return (
-        <Link href="/room" passHref>
+        <Link href={`/rooms/${slug}`} passHref>
             <div className="flex flex-col w-[calc(50%-0.75rem)] h-full bg-white border border-gray-100 rounded-lg shadow-sm p-2 cursor-pointer group even:-mt-40 lg:w-[calc(50%-0.375rem)] lg:even:-mt-24 md:even:-mt-16 sm:w-full sm:even:mt-0">
                 <div className="relative rounded-t w-full h-[480px] overflow-hidden xl:h-80 lg:h-64 md:h-52">
                     <Image
@@ -26,14 +26,14 @@ const SuperiorRoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, p
                         <div className="space-y-2">
                             <div className="flex items-center text-asphalt tracking-wide text-sm">
                                 <IoBedOutline className="text-xl mr-2" />
-                                <span>{bed}</span>
+                                <span>{info?.bed}</span>
                             </div>
                             <div className="flex items-center text-asphalt tracking-wide text-sm">
                                 <UsersIcon className="h-5 mr-2" />
                                 <span className="truncate">{guests}</span>
                             </div>
                             {
-                                breakfast &&
+                                info?.breakfast &&
                                 <div className="flex items-center text-asphalt tracking-wide text-sm">
                                     <GiForkKnifeSpoon className="text-xl mr-2" />
                                     <span>Breakfast Included</span>
@@ -41,7 +41,7 @@ const SuperiorRoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, p
                             }
                             <div className="flex items-center text-asphalt tracking-wide text-sm">
                                 <TemplateIcon className="h-5 mr-2" />
-                                <span>{sqmts} sqm</span>
+                                <span>{info?.sqmts} sqm</span>
                             </div>
                         </div>
                         <div className="text-sm text-gray-700 lg:hidden">
@@ -52,7 +52,7 @@ const SuperiorRoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, p
                     <div className="flex-1 flex flex-col items-end justify-between lg:flex-row">
                         <div className="flex items-center text-camel tracking-wider">
                             <StarIcon className="h-6 mr-2 w-3/4" />
-                            <span>{ratings}</span>
+                            <span>4</span>
                         </div>
                         <div className="flex flex-col items-end text-sm text-asphalt md:text-xs">
                             Starting From

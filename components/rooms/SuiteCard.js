@@ -4,7 +4,7 @@ import { GiForkKnifeSpoon } from 'react-icons/gi'
 import { IoBedOutline } from 'react-icons/io5'
 import Link from "next/link"
 
-const SuiteCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price }) => {
+const SuiteCard = ({ name, slug, img, guests, price, info }) => {
     return (
         <div className="w-full flex even:justify-end group">
             <div className="relative rounded w-3/4 h-[70vh] xl:h-[60vh] lg:h-[50vh] md:h-[40vh] sm:w-full">
@@ -23,7 +23,7 @@ const SuiteCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price })
                             </div>
                             <div className="flex items-center text-camel tracking-wider lg:hidden">
                                 <StarIcon className="h-6 mr-2 w-3/4" />
-                                <span>{ratings}</span>
+                                <span>4</span>
                             </div>
                         </div>
                         <div className="text-sm text-gray-700 pr-6 truncate whitespace-normal my-2.5">
@@ -34,14 +34,14 @@ const SuiteCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price })
                             <div className="space-y-2 mb-2">
                                 <div className="flex items-center text-asphalt tracking-wide text-sm sm:text-xs">
                                     <IoBedOutline className="text-xl mr-2" />
-                                    <span>{bed}</span>
+                                    <span>{info?.bed}</span>
                                 </div>
                                 <div className="flex items-center text-asphalt tracking-wide text-sm sm:text-xs">
                                     <UsersIcon className="h-5 mr-2" />
                                     <span>{guests}</span>
                                 </div>
                                 {
-                                    breakfast &&
+                                    info?.breakfast &&
                                     <div className="flex items-center text-asphalt tracking-wide text-sm sm:text-xs">
                                         <GiForkKnifeSpoon className="text-xl mr-2" />
                                         <span>Breakfast Included</span>
@@ -49,12 +49,12 @@ const SuiteCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price })
                                 }
                                 <div className="flex items-center text-asphalt tracking-wide text-sm sm:text-xs">
                                     <TemplateIcon className="h-5 mr-2" />
-                                    <span>{sqmts} sqm</span>
+                                    <span>{info?.sqmts} sqm</span>
                                 </div>
                             </div>
                         </div>
                         <div className="flex items-end justify-between">
-                            <Link href="/room" passHref>
+                            <Link href={`/rooms/${slug}`} passHref>
                                 <button className="text-sm rounded font-light tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru/30 hover:border-ecru bg-ecru/20 hover:bg-ecru/30 sm:px-4 sm:py-1.5 sm:tracking-normal">
                                     Book Now
                                 </button>

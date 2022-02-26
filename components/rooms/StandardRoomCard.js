@@ -4,9 +4,9 @@ import { GiForkKnifeSpoon } from 'react-icons/gi'
 import { IoBedOutline } from 'react-icons/io5'
 import Link from "next/link"
 
-const StandardRoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, price }) => {
+const StandardRoomCard = ({ name, slug, img, guests, price, info }) => {
     return (
-        <Link href="/room" passHref>
+        <Link href={`/rooms/${slug}`} passHref>
             <div className="flex w-full bg-white border border-gray-100 rounded-lg shadow-sm p-2 cursor-pointer group md:w-full sm:flex-col">
                 <div className="relative rounded-l w-96 h-64 flex-1 overflow-hidden xl:flex-[1.2] lg:h-52 md:flex-[1.9] sm:flex-none sm:w-full sm:h-48 sm:rounded-t sm:rounded-bl-none">
                     <Image
@@ -26,14 +26,14 @@ const StandardRoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, p
                         <div className="space-y-2">
                             <div className="flex items-center text-asphalt tracking-wide text-sm">
                                 <IoBedOutline className="text-xl mr-2" />
-                                <span>{bed}</span>
+                                <span>{info?.bed}</span>
                             </div>
                             <div className="flex items-center text-asphalt tracking-wide text-sm">
                                 <UsersIcon className="h-5 mr-2" />
                                 <span>{guests}</span>
                             </div>
                             {
-                                breakfast &&
+                                info?.breakfast &&
                                 <div className="flex items-center text-asphalt tracking-wide text-sm">
                                     <GiForkKnifeSpoon className="text-xl mr-2" />
                                     <span>Breakfast Included</span>
@@ -41,7 +41,7 @@ const StandardRoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, p
                             }
                             <div className="flex items-center text-asphalt tracking-wide text-sm">
                                 <TemplateIcon className="h-5 mr-2" />
-                                <span>{sqmts} sqm</span>
+                                <span>{info?.sqmts} sqm</span>
                             </div>
                         </div>
                         <div className="text-sm text-gray-700 lg:hidden">
@@ -52,7 +52,7 @@ const StandardRoomCard = ({ name, img, bed, guests, breakfast, sqmts, ratings, p
                     <div className="flex-1 flex flex-col items-end justify-between md:flex-row">
                         <div className="flex items-center text-camel tracking-wider">
                             <StarIcon className="h-6 mr-2 w-3/4" />
-                            <span>{ratings}</span>
+                            <span>3</span>
                         </div>
                         <div className="flex flex-col items-end text-sm text-asphalt md:text-xs">
                             Starting From
