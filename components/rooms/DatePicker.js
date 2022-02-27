@@ -1,6 +1,5 @@
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline"
 import moment from "moment"
-import Link from "next/link"
 import { useRouter } from "next/router"
 import { useCallback, useEffect, useState } from "react"
 import { DateRangePicker } from "react-dates"
