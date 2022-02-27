@@ -207,9 +207,32 @@ const Reservations = ({ reservation, error }) => {
                                     {
                                         reservation ?
                                             <div className="bg-white border rounded shadow p-3 text-asphalt ">
+
                                                 <div className="flex items-center justify-between text-sm">
                                                     <span className="tracking-wide">Reservation N°</span>
                                                     <span className="text-[13px]">{reservation._id}</span>
+                                                </div>
+
+                                                <hr className="bg-jungle/10 h-0.5 m-2.5 sm:m-2" />
+
+                                                <div className="flex flex-col gap-1">
+                                                    <h4 className="text-sm">GUEST INFO</h4>
+
+                                                    <div className="flex justify-between mx-3">
+
+                                                        <div className="flex flex-col text-sm tracking-wide">
+                                                            <span>First Name</span>
+                                                            <span>Last Name</span>
+                                                            <span>Email</span>
+                                                        </div>
+
+                                                        <div className="flex flex-col text-sm">
+                                                            <span>{reservation.guest?.firstName}</span>
+                                                            <span>{reservation.guest?.lastName}</span>
+                                                            <span>{reservation.guest?.email}</span>
+                                                        </div>
+
+                                                    </div>
                                                 </div>
 
                                                 <hr className="bg-jungle/10 h-0.5 m-2.5 sm:m-2" />
