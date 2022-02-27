@@ -13,28 +13,7 @@ import ReservationCard from "../components/reservations/ReservationCard"
 import LoginInfo from "../components/reservations/LoginInfo"
 import ProfileInfo from "../components/reservations/ProfileInfo"
 
-export const getServerSideProps = async ({ query: { reservationId: id } }) => {
-    try {
-        const res = id && await api.get(`/reservations/${id}`)
-
-        return {
-            props: {
-                reservation: res?.data.reservation || null,
-            }
-        }
-    } catch (err) {
-        const error = err?.response?.data?.message
-        console.log(error)
-
-        return {
-            props: {
-                error: error || null
-            }
-        }
-    }
-}
-
-const Reservations = ({ reservation, error }) => {
+const Reservations = () => {
 
     const dispatchNotification = useNotification()
 
@@ -45,6 +24,7 @@ const Reservations = ({ reservation, error }) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [search, setSearch] = useState('')
     const [reservations, setReservations] = useState([])
+    const [reservation, setReservation] = useState(null)
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -57,8 +37,21 @@ const Reservations = ({ reservation, error }) => {
         })
     }
 
+    useEffect(async () => {
+        try {
+            const res = reservationId && await api.get(`/reservations/${reservationId}`)
+            setReservation(res?.data.reservation)
+
+        } catch (err) {
+            const error = err?.response?.data?.message
+            console.log(error || err)
+            setReservation(null)
+            dispatchNotification({ type: "ERROR", message: error || "something went wrong" })
+        }
+    }, [reservationId])
+
     useEffect(() => {
-        router.replace('/reservations')
+        Object.keys(user).length > 0 && router.replace('/reservations')
 
         const getReservationsByUserId = async () => {
             try {

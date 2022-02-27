@@ -9,7 +9,7 @@ import StandardRoomCard from "../../components/rooms/StandardRoomCard"
 import SuiteCard from "../../components/rooms/SuiteCard"
 import SuperiorRoomCard from "../../components/rooms/SuperiorRoomCard"
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
     const res = await api.get(requests.getRooms)
 
     return {

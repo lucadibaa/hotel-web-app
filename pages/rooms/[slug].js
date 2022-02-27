@@ -7,37 +7,32 @@ import { IoBedOutline, IoTvOutline } from 'react-icons/io5'
 import { MdCoffeeMaker, MdPets } from 'react-icons/md'
 import { useRouter } from "next/router"
 import api from "../../api/axios"
+import { useEffect } from "react"
 
 export const getServerSideProps = async ({ params: { slug } }) => {
-    try {
-        const res = await api.get(`/rooms/${slug}`)
+    const res = await api.get(`/rooms/${slug}`)
 
-        return {
-            props: {
-                room: res?.data.room || {},
-            }
-        }
-    } catch (err) {
-        const error = err?.response?.data?.message
-        console.log(error)
-
-        return {
-            props: {
-                error: error || null
-            }
+    return {
+        props: {
+            room: res?.data.room || {},
         }
     }
 }
 
-const RoomPage = ({ room: { name, image, guests, price, info }, error }) => {
+const RoomPage = ({ room: { name, image, guests, price, info } }) => {
 
     const router = useRouter()
+
+    if (!name) {
+        typeof window !== 'undefined' && router.replace('/rooms')
+        return null
+    }
 
     const handleClick = () => {
         router.push({
             pathname: '/booking',
             query: {
-                room: room.name
+                room: name
             }
         })
     }
@@ -50,7 +45,8 @@ const RoomPage = ({ room: { name, image, guests, price, info }, error }) => {
 
             <section>
                 <div className="relative w-screen h-[89vh] overflow-hidden">
-                    <Image src={image}
+                    <Image
+                        src={image}
                         alt={name}
                         layout="fill"
                         objectFit="cover"
