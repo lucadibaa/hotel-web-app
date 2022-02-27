@@ -3,8 +3,8 @@ import { SearchIcon } from '@heroicons/react/outline'
 const Filters = ({ searchInput, setSearchInput }) => {
     return (
         <>
-            <select className="select text-sm 2xl:h-9 2xl:py-0 sm:w-24 sm:px-1">
-                <option className="option" value="" selected disabled>Sort By</option>
+            <select className="select text-sm 2xl:h-9 2xl:py-0 sm:w-24 sm:px-1" defaultValue={""}>
+                <option className="option" value="" disabled>Sort By</option>
                 <option className="option" value="1">Recommended</option>
                 <option className="option" value="2">Lowest Price</option>
                 <option className="option" value="3">Highest Price</option>

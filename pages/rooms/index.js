@@ -42,7 +42,7 @@ const Rooms = ({ rooms, error }) => {
 
 
             <Banner />
-            <DatePicker show={show} setShow={setShow} isHidden={isHidden} setIsHidden={setIsHidden} />
+            <DatePicker show={show} setShow={setShow} isHidden={isHidden} setIsHidden={setIsHidden} rooms={rooms} />
 
             <main className={`mt-5 max-w-[90%] mx-auto space-y-24 pb-20 lg:space-y-12 transition ${show && 'pt-14 xl:pt-10 lg:pt-[105px] md:pt-[92px]'} ${!isHidden && show ? 'sm:pt-40' : 'sm:pt-0'}`}>
                 <section>

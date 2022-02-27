@@ -8,7 +8,7 @@ import 'react-dates/initialize'
 import 'react-dates/lib/css/_datepicker.css'
 import useWindowSize from "../../utils/useWindowSize"
 
-const DatePicker = ({ show, setShow, isHidden, setIsHidden }) => {
+const DatePicker = ({ show, setShow, isHidden, setIsHidden, rooms }) => {
 
     const router = useRouter()
     const { width } = useWindowSize()
@@ -35,6 +35,7 @@ const DatePicker = ({ show, setShow, isHidden, setIsHidden }) => {
     }, [navbarTransition])
 
     const [guests, setGuests] = useState('')
+    const [selectedRoom, setSelectedRoom] = useState('')
 
     const handleClick = () => {
         let query = {}
@@ -42,6 +43,7 @@ const DatePicker = ({ show, setShow, isHidden, setIsHidden }) => {
         query.departure = datesRange.endDate ? moment(datesRange.endDate).format('DD-MM-YYYY') : undefined
         query.nights = datesRange.endDate?.diff(datesRange.startDate, 'days') || undefined
         query.guests = guests || undefined
+        query.room = selectedRoom || undefined
 
         router.push({
             pathname: '/booking',
@@ -57,18 +59,21 @@ const DatePicker = ({ show, setShow, isHidden, setIsHidden }) => {
         <div className={`w-full h-16 bg-white font-Sofia shadow flex items-center justify-between px-[2%] lg:flex-col lg:h-32 lg:px-[6%] md:h-[6.5rem] md:py-1 sm:h-44 sm:space-y-1.5 sm:py-2 ${show && 'fixed top-20 z-40 xl:top-16 md:top-12 sm:top-0'}`}>
             <div className="flex-1 flex items-center w-full gap-8 sm:flex-col sm:gap-1.5">
                 <div className="sm:self-start sm:flex-[1.5] flex items-center sm:w-full justify-between">
-                    <select className="select">
-                        <option className="option" value="" selected disabled>Select Room</option>
-                        <option className="option" value="Historic Garden Room">Historic Garden Room</option>
-                        <option className="option" value="Historic Ocean Room">Historic Ocean Room</option>
+                    <select className="select" defaultValue="" onChange={e => setSelectedRoom(e.target.value)}>
+                        <option className="option" value="" disabled>Select Room</option>
+                        {
+                            rooms?.map(r => (
+                                <option className="option" key={r._id} value={r.name}>{r.name}</option>
+                            ))
+                        }
                     </select>
                     <div className={`hidden sm:flex items-center space-x-1.5 ${!show && 'sm:hidden'}`} onClick={() => setIsHidden(true)}>
                         <span className="text-xs">Hide:</span>
                         <ChevronUpIcon className="h-4 text-asphalt" />
                     </div>
                 </div>
-                <select className="flex-[1.5] select sm:self-end" onChange={e => setGuests(e.target.value)}>
-                    <option className="option" value="" selected disabled>Guests</option>
+                <select className="flex-[1.5] select sm:self-end" onChange={e => setGuests(e.target.value)} defaultValue="">
+                    <option className="option" value="" disabled>Guests</option>
                     <option className="option" value="1">1 Adult Per Room</option>
                     <option className="option" value="2">2 Adults Per Room</option>
                     <option className="option" value="3">3 Adults Per Room</option>

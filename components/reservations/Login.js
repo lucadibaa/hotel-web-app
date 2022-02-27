@@ -2,7 +2,7 @@ import { XIcon } from "@heroicons/react/solid"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { login } from "../../redux/userActions"
-import TextField from "../assets/formik/TextField"
+import TextField from "../assets/TextField"
 
 const Login = ({ isModalOpen, setIsModalOpen, noRegister }) => {
 
