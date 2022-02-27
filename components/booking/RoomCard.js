@@ -7,8 +7,9 @@ import { useRouter } from "next/router"
 import moment from "moment"
 import { selectRoom, selectArrival, selectDeparture, calcTotal } from "../../redux/bookingSlice"
 import { useDispatch, useSelector } from "react-redux"
+import { getDigits } from "../../utils/functions"
 
-const RoomCard = ({ room, name, img, bed, guests, breakfast, sqmts, price, selectedGuests, datesRange }) => {
+const RoomCard = ({ room, name, img, guests, price, info, selectedGuests, datesRange }) => {
 
     const router = useRouter()
     const dispatch = useDispatch()
@@ -51,22 +52,19 @@ const RoomCard = ({ room, name, img, bed, guests, breakfast, sqmts, price, selec
                 <div className="space-y-2 sm:hidden">
                     <div className="flex items-center tracking-wide text-xs">
                         <IoBedOutline className="text-lg mr-2" />
-                        <span>{bed}</span>
+                        <span>{info?.bed}</span>
                     </div>
                     <div className="flex items-center tracking-wide text-xs">
                         <UsersIcon className="h-5 mr-2" />
                         <span>{guests}</span>
                     </div>
-                    {
-                        breakfast &&
-                        <div className="flex items-center tracking-wide text-xs">
-                            <GiForkKnifeSpoon className="text-lg mr-2" />
-                            <span>Breakfast Included</span>
-                        </div>
-                    }
+                    <div className={`flex items-center tracking-wide text-xs ${!info?.breakfast && 'hidden'}`}>
+                        <GiForkKnifeSpoon className="text-lg mr-2" />
+                        <span>Breakfast Included</span>
+                    </div>
                     <div className="flex items-center tracking-wide text-xs">
                         <TemplateIcon className="h-5 mr-2" />
-                        <span>{sqmts} sqm</span>
+                        <span>{info?.sqmts} sqm</span>
                     </div>
                     <div className="flex items-center tracking-wide text-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 mr-2" viewBox="0 0 40 40">
@@ -76,13 +74,13 @@ const RoomCard = ({ room, name, img, bed, guests, breakfast, sqmts, price, selec
                                 <path d="M28.6 25.7l-5.7-6-1.5 1.5 4.5 4.5h-1.4l-6.4-6.6-6.7 6.6"></path>
                             </g>
                         </svg>
-                        <span>Ocean View</span>
+                        <span>{info?.view}</span>
                     </div>
-                    <div className="flex items-center tracking-wide text-xs">
+                    <div className={`flex items-center tracking-wide text-xs ${!info?.coffeeMachine && 'hidden'}`}>
                         <MdCoffeeMaker className="text-lg mr-2" />
                         <span>Espresso Coffee Machine</span>
                     </div>
-                    <div className="flex items-center tracking-wide text-xs">
+                    <div className={`flex items-center tracking-wide text-xs ${!info?.pets && 'hidden'}`}>
                         <MdPets className="text-lg mr-2" />
                         <span>Pets allowed</span>
                     </div>
@@ -96,12 +94,11 @@ const RoomCard = ({ room, name, img, bed, guests, breakfast, sqmts, price, selec
                         </div>
                         <span className="text-[15px]">Garden Suite</span>
                         <div className="text-[13px] mt-4 space-y-2.5 sm:mt-1.5">
-                            <span>Sleeps 4 | 2 King | {sqmts} m²</span>
+                            <span>Sleeps {getDigits(guests)}  | {info?.bed} | {info?.sqmts} m²</span>
                             <div className="w-2/3 sm:w-full">This unique suite overlooks Baie Longue with an alfresco dining area for breakfasts with a view.</div>
                             <ul className="list-inside list-disc">
-                                <li>Private infinity pool</li>
-                                <li>Private infinity pool</li>
-                                <li>Private infinity pool</li>
+                                <li className={!info?.pool ? 'hidden' : ''}>Private infinity pool</li>
+                                <li className={!info?.bathtub ? 'hidden' : ''}>Private bathtub</li>
                             </ul>
                             <div>
                                 <span className="mb-0.5 border-b border-ecru cursor-pointer">Room details</span>

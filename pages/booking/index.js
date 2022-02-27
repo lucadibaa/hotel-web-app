@@ -83,7 +83,7 @@ const Booking = ({ rooms }) => {
                         <div className="flex flex-wrap gap-2">
                             {
                                 rooms?.filter(r => r.name.toLowerCase().includes(searchInput.toLowerCase())).map(r => (
-                                    <RoomCard key={r._id} room={r} name={r.name} img={r.image} bed={r.bed} guests={r.guests} breakfast={r.breakfast} sqmts={r.sqmts} price={r.price} selectedGuests={guests} datesRange={datesRange} />
+                                    <RoomCard key={r._id} room={r} name={r.name} slug={r.slug} img={r.image} guests={r.guests} price={r.price} info={r.info} selectedGuests={guests} datesRange={datesRange} />
                                 ))
                             }
                         </div>

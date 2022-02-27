@@ -58,9 +58,11 @@ const Banner = () => {
                                         Our beachfron luxory hotel encapsulates extraordinary experiences, effortlessly weaving moder comfort, indigenous accents and redifined luxury.
                                     </div>
                                     <div className="flex justify-end">
-                                        <button className="rounded font-light font-Sofia tracking-wider text-lg text-platinum px-9 py-4 transition-all border border-ecru hover:border-camel 2xl:text-base 2xl:px-7 2xl:py-3 xl:px-5 xl:py-2 md:text-sm">
-                                            Book Now
-                                        </button>
+                                        <Link href="/booking">
+                                            <button className="rounded font-light font-Sofia tracking-wider text-lg text-platinum px-9 py-4 transition-all border border-ecru hover:border-camel 2xl:text-base 2xl:px-7 2xl:py-3 xl:px-5 xl:py-2 md:text-sm">
+                                                Book Now
+                                            </button>
+                                        </Link>
                                     </div>
                                 </div>
                             </div>

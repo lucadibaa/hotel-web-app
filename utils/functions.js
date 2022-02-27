@@ -5,3 +5,8 @@ export const toEuropean = date => {
 export const toAmerican = date => {
     return date?.replace(/-/g, ' - ').replace(/\//g, ' - ').split(' ').reverse().join('')
 }
+
+export const getDigits = string => {
+    const regex = /\d+/g
+    return string.match(regex)
+}
