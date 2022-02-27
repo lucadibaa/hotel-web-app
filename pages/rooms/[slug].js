@@ -23,7 +23,7 @@ export const getServerSideProps = async ({ params: { slug } }) => {
 
         return {
             props: {
-                error
+                error: error || null
             }
         }
     }

@@ -24,7 +24,7 @@ export const getStaticProps = async () => {
 
         return {
             props: {
-                error
+                error: error || null
             }
         }
     }

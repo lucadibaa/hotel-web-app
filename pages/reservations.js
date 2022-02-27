@@ -28,7 +28,7 @@ export const getServerSideProps = async ({ query: { reservationId: id } }) => {
 
         return {
             props: {
-                error
+                error: error || null
             }
         }
     }
