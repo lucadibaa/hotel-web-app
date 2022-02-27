@@ -10,27 +10,16 @@ import SuiteCard from "../../components/rooms/SuiteCard"
 import SuperiorRoomCard from "../../components/rooms/SuperiorRoomCard"
 
 export const getStaticProps = async () => {
-    try {
-        const res = await api.get(requests.getRooms)
+    const res = await api.get(requests.getRooms)
 
-        return {
-            props: {
-                rooms: res?.data.rooms || [],
-            }
-        }
-    } catch (err) {
-        const error = err?.response?.data?.message
-        console.log(error)
-
-        return {
-            props: {
-                error: error || null
-            }
+    return {
+        props: {
+            rooms: res?.data.rooms || [],
         }
     }
 }
 
-const Rooms = ({ rooms, error }) => {
+const Rooms = ({ rooms }) => {
     const [show, setShow] = useState(false)
     const [isHidden, setIsHidden] = useState(false)
 
