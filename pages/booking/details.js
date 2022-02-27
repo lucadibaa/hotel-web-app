@@ -47,12 +47,17 @@ const Details = () => {
         }
 
         try {
-            await api.post(requests.generateReservation, { ...values, ...router.query, total, arrival, departure, roomSlug: room.slug })
+            const res = await api.post(requests.generateReservation, { ...values, ...router.query, total, arrival, departure, roomSlug: room.slug })
             dispatchNotification({ type: 'SUCCESS', message: 'Reservation successfully created' })
             dispatch(clear())
 
             if (values.payment === 'hotel') {
-                router.push('confirmation')
+                router.push({
+                    pathname: 'confirmation',
+                    query: {
+                        reservationId: res.data?.id
+                    }
+                })
             } else {
                 // redirect to stripe payment
             }
