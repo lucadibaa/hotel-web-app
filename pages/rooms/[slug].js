@@ -9,6 +9,7 @@ import { useRouter } from "next/router"
 import api from "../../api/axios"
 import { useEffect, useState } from "react"
 import requests from "../../api/requests"
+import { useNotification } from "../../components/assets/notifications/NotificationProvider"
 
 // export const getServerSideProps = async ({ params: { slug } }) => {
 //     const res = await api.get(`/rooms/${slug}`)
@@ -24,6 +25,7 @@ const RoomPage = () => {
 
     const router = useRouter()
     const [room, setRoom] = useState(null)
+    const dispatchNotification = useNotification()
     const { slug } = router.query
 
     useEffect(() => {
