@@ -7,21 +7,41 @@ import { IoBedOutline, IoTvOutline } from 'react-icons/io5'
 import { MdCoffeeMaker, MdPets } from 'react-icons/md'
 import { useRouter } from "next/router"
 import api from "../../api/axios"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
+import requests from "../../api/requests"
 
-export const getServerSideProps = async ({ params: { slug } }) => {
-    const res = await api.get(`/rooms/${slug}`)
+// export const getServerSideProps = async ({ params: { slug } }) => {
+//     const res = await api.get(`/rooms/${slug}`)
 
-    return {
-        props: {
-            room: res?.data.room || {},
-        }
-    }
-}
+//     return {
+//         props: {
+//             room: res?.data.room || {},
+//         }
+//     }
+// }
 
-const RoomPage = ({ room: { name, image, guests, price, info } }) => {
+const RoomPage = () => {
 
     const router = useRouter()
+    const [room, setRoom] = useState(null)
+    const { slug } = router.query
+
+    useEffect(() => {
+        const getRoom = async () => {
+            try {
+                const { data } = await api.get(`${requests.getRooms}/${slug}`)
+                setRoom(data?.room)
+            } catch (err) {
+                console.log({ ...err })
+                dispatchNotification({ type: 'ERROR', message: err.message })
+            }
+        }
+        getRoom()
+    }, [slug])
+
+    if (!room) return null //loading
+
+    const { name, image, guests, price, info } = room
 
     if (!name) {
         typeof window !== 'undefined' && router.replace('/rooms')
