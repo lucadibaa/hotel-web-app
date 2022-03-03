@@ -38,7 +38,7 @@ const RoomPage = () => {
                 dispatchNotification({ type: 'ERROR', message: err.message })
             }
         }
-        getRoom()
+        slug && getRoom()
     }, [slug])
 
     if (!room) return null //loading
