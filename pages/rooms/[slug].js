@@ -29,7 +29,7 @@ export const getStaticProps = async ({ params: { slug } }) => {
 
     return {
         props: {
-            room: data?.room
+            room: data?.room || null
         }
     }
 }
