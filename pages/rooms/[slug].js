@@ -6,13 +6,12 @@ import { GiBathtub, GiForkKnifeSpoon } from 'react-icons/gi'
 import { IoBedOutline, IoTvOutline } from 'react-icons/io5'
 import { MdCoffeeMaker, MdPets } from 'react-icons/md'
 import { useRouter } from "next/router"
-import api from "../../api/axios"
-import requests from "../../api/requests"
+import { getRoomBySlug, getRooms } from "../../server/lib/rooms"
 
 export const getStaticPaths = async () => {
-    const { data } = await api.get(requests.getRooms)
+    const rooms = await getRooms()
 
-    const paths = data?.rooms.map(room => {
+    const paths = rooms?.map(room => {
         return {
             params: { slug: room.slug }
         }
@@ -25,11 +24,11 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async ({ params: { slug } }) => {
-    const { data } = await api.get(`/rooms/${slug}`)
+    const room = await getRoomBySlug(slug)
 
     return {
         props: {
-            room: data?.room || null
+            room: room || null
         }
     }
 }

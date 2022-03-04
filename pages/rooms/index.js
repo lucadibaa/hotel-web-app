@@ -8,13 +8,14 @@ import DatePicker from "../../components/rooms/DatePicker"
 import StandardRoomCard from "../../components/rooms/StandardRoomCard"
 import SuiteCard from "../../components/rooms/SuiteCard"
 import SuperiorRoomCard from "../../components/rooms/SuperiorRoomCard"
+import { getRooms } from "../../server/lib/rooms"
 
 export const getServerSideProps = async () => {
-    const res = await api.get(requests.getRooms)
+    const rooms = await getRooms()
 
     return {
         props: {
-            rooms: res?.data?.rooms || []
+            rooms: rooms || []
         }
     }
 }
