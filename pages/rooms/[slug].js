@@ -7,13 +7,29 @@ import { IoBedOutline, IoTvOutline } from 'react-icons/io5'
 import { MdCoffeeMaker, MdPets } from 'react-icons/md'
 import { useRouter } from "next/router"
 import api from "../../api/axios"
+import requests from "../../api/requests"
 
-export const getServerSideProps = async ({ params: { slug } }) => {
-    const res = await api.get(`/rooms/${slug}`)
+export const getStaticPaths = async () => {
+    const { data } = await api.get(requests.getRooms)
+
+    const paths = data?.rooms.map(room => {
+        return {
+            params: { slug: room.slug }
+        }
+    })
+
+    return {
+        paths,
+        fallback: false
+    }
+}
+
+export const getStaticProps = async ({ params: { slug } }) => {
+    const { data } = await api.get(`/rooms/${slug}`)
 
     return {
         props: {
-            room: res?.data.room || null
+            room: data?.room
         }
     }
 }

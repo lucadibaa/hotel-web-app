@@ -1,7 +1,7 @@
 import dbConnect from '../../../server/dbConnect'
 import Room from '../../../server/models/Room'
 
-const create = async (req, res) => {
+const getRooms = async (req, res) => {
     const { method } = req
 
     await dbConnect()
@@ -20,4 +20,4 @@ const create = async (req, res) => {
     }
 }
 
-export default create
+export default getRooms
