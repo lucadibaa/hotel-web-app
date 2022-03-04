@@ -1,6 +1,6 @@
 import Head from "next/head"
 import api from "../../api/axios"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import requests from "../../api/requests"
 import Layout from "../../components/layout/Layout"
 import Banner from "../../components/rooms/Banner"
@@ -8,26 +8,20 @@ import DatePicker from "../../components/rooms/DatePicker"
 import StandardRoomCard from "../../components/rooms/StandardRoomCard"
 import SuiteCard from "../../components/rooms/SuiteCard"
 import SuperiorRoomCard from "../../components/rooms/SuperiorRoomCard"
-import { useNotification } from '../../components/assets/notifications/NotificationProvider'
 
-const Rooms = () => {
+export const getServerSideProps = async () => {
+    const res = await api.get(requests.getRooms)
+
+    return {
+        props: {
+            rooms: res?.data?.rooms || []
+        }
+    }
+}
+
+const Rooms = ({ rooms }) => {
     const [show, setShow] = useState(false)
     const [isHidden, setIsHidden] = useState(false)
-    const [rooms, setRooms] = useState([])
-    const dispatchNotification = useNotification()
-
-    useEffect(() => {
-        const getRooms = async () => {
-            try {
-                const { data } = await api.get(requests.getRooms)
-                setRooms(data?.rooms)
-            } catch (err) {
-                console.log({ ...err })
-                dispatchNotification({ type: 'ERROR', message: err.message })
-            }
-        }
-        getRooms()
-    }, [])
 
     return (
         <Layout>
