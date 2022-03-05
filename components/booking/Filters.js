@@ -1,13 +1,13 @@
 import { SearchIcon } from '@heroicons/react/outline'
 
-const Filters = ({ searchInput, setSearchInput }) => {
+const Filters = ({ searchInput, setSearchInput, sort, setSort }) => {
     return (
         <>
-            <select className="select text-sm 2xl:h-9 2xl:py-0 sm:w-24 sm:px-1" defaultValue={""}>
+            <select className="select text-sm 2xl:h-9 2xl:py-0 sm:w-24 sm:px-1" onChange={e => setSort(e.target.value)} defaultValue={sort}>
                 <option className="option" value="" disabled>Sort By</option>
-                <option className="option" value="1">Recommended</option>
-                <option className="option" value="2">Lowest Price</option>
-                <option className="option" value="3">Highest Price</option>
+                <option className="option" value="recommended">Recommended</option>
+                <option className="option" value="lowest">Lowest Price</option>
+                <option className="option" value="highest">Highest Price</option>
             </select>
 
             <div className="relative text-asphalt">

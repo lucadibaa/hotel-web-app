@@ -7,14 +7,14 @@ import RoomCard from "../../components/booking/RoomCard"
 import { useEffect, useState } from "react"
 import moment from "moment"
 import { useRouter } from "next/router"
-import { toAmerican } from "../../utils/functions"
+import { getDigits, toAmerican } from "../../utils/functions"
 import InfoSection from "../../components/booking/InfoSection"
 import api from "../../api/axios"
 
-export const getServerSideProps = async ({ query: { arrival, departure } }) => {
+export const getServerSideProps = async ({ query: { arrival, departure, sort } }) => {
 
     try {
-        const res = await api.get(`/rooms/availables?arrival=${arrival}&departure=${departure}`)
+        const res = await api.get(`/rooms/availables?arrival=${arrival}&departure=${departure}&sort=${sort}`)
 
         return {
             props: {
@@ -35,10 +35,11 @@ export const getServerSideProps = async ({ query: { arrival, departure } }) => {
 
 const Booking = ({ rooms }) => {
     const router = useRouter()
-    const { arrival, departure, guests: qGuests, room } = router.query
+    const { arrival, departure, guests: qGuests, room, sort: qSort } = router.query
 
     const [guests, setGuests] = useState(qGuests || '2')
     const [searchInput, setSearchInput] = useState(room || '')
+    const [sort, setSort] = useState(qSort || '')
 
     const [datesRange, setDatesRange] = useState({
         startDate: arrival ? moment(toAmerican(arrival)) : moment(),
@@ -47,14 +48,22 @@ const Booking = ({ rooms }) => {
 
     useEffect(() => {
         // if (moment(datesRange.startDate).format('DD-MM-YYYY').isValid() && moment(datesRange.endDate).format('DD-MM-YYYY').isValid())
+        let query = {
+            arrival: moment(datesRange.startDate).format('DD-MM-YYYY'),
+            departure: moment(datesRange.endDate).format('DD-MM-YYYY'),
+        }
+        if (sort) query.sort = sort
         router.replace({
             pathname: '/booking',
-            query: {
-                arrival: moment(datesRange.startDate).format('DD-MM-YYYY'),
-                departure: moment(datesRange.endDate).format('DD-MM-YYYY'),
-            }
+            query
         })
-    }, [datesRange])
+    }, [datesRange, sort])
+
+    const sortRooms = (a, b) => {
+        if (sort === 'highest') return b.price - a.price
+        if (sort === 'lowest') return a.price - b.price
+        if (sort === 'recommended') return -1
+    }
 
     return (
         <Layout noBanner>
@@ -76,13 +85,13 @@ const Booking = ({ rooms }) => {
                     </section>
 
                     <section className="bg-white h-16 border-b shadow-sm flex items-center justify-end space-x-10 pr-10 sm:px-2 sm:space-x-8">
-                        <Filters searchInput={searchInput} setSearchInput={setSearchInput} />
+                        <Filters searchInput={searchInput} setSearchInput={setSearchInput} sort={sort} setSort={setSort} />
                     </section>
 
                     <section className="pt-2 sm:pt-0.5">
                         <div className="flex flex-wrap gap-2">
                             {
-                                rooms?.filter(r => r.name.toLowerCase().includes(searchInput.toLowerCase())).map(r => (
+                                rooms?.filter(r => r.name.toLowerCase().includes(searchInput.toLowerCase()) && getDigits(r.guests) >= guests).sort((a, b) => sortRooms(a, b)).map(r => (
                                     <RoomCard key={r._id} room={r} name={r.name} slug={r.slug} img={r.image} guests={r.guests} price={r.price} info={r.info} selectedGuests={guests} datesRange={datesRange} />
                                 ))
                             }

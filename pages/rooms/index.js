@@ -1,7 +1,5 @@
 import Head from "next/head"
-import api from "../../api/axios"
 import { useState } from "react"
-import requests from "../../api/requests"
 import Layout from "../../components/layout/Layout"
 import Banner from "../../components/rooms/Banner"
 import DatePicker from "../../components/rooms/DatePicker"
