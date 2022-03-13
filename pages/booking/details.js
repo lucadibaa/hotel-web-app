@@ -21,10 +21,8 @@ import { clear } from "../../redux/bookingSlice"
 const Details = () => {
 
     const dispatchNotification = useNotification()
-
-    const dispatch = useDispatch()
     const router = useRouter()
-    const { arrival, departure, nights, guests } = router.query
+    const { arrival, departure, nights, guests, firstName, lastName, email, cell, requests, payment } = router.query
     const { user } = useSelector(state => state.user)
     const { room, total } = useSelector(state => state.booking)
 
@@ -41,29 +39,17 @@ const Details = () => {
     }
 
     const handleSubmit = async values => {
-        if (values.password) {
+        const { password, newsletter, privacy, booking, ...others } = values
+
+        if (password) {
             // dispatch register
             dispatchNotification({ type: 'SUCCESS', message: 'User registered successfully' })
         }
 
-        try {
-            const res = await api.post(requests.generateReservation, { ...values, ...router.query, total, arrival, departure, roomSlug: room.slug })
-            dispatchNotification({ type: 'SUCCESS', message: 'Reservation successfully created' })
-            dispatch(clear())
-
-            if (values.payment === 'hotel') {
-                router.push({
-                    pathname: 'confirmation',
-                    query: {
-                        reservationId: res.data?.id
-                    }
-                })
-            } else {
-                // redirect to stripe payment
-            }
-        } catch (err) {
-            dispatchNotification({ type: 'ERROR', message: `${err.message} Please try again Later.` })
-        }
+        router.push({
+            pathname: 'confirmation',
+            query: { ...others, ...router.query, total, arrival, departure, roomSlug: room.slug }
+        })
     }
 
     return (
@@ -77,13 +63,13 @@ const Details = () => {
                 {/* Left */}
                 <Formik
                     initialValues={{
-                        firstName: '',
-                        lastName: '',
-                        cell: '',
-                        email: '',
+                        firstName: firstName || '',
+                        lastName: lastName || '',
+                        cell: cell || '',
+                        email: email || '',
                         password: '',
-                        requests: '',
-                        payment: 'hotel',
+                        requests: requests || '',
+                        payment: payment || 'hotel',
                         newsletter: false,
                         privacy: false,
                         booking: false,
@@ -113,7 +99,7 @@ const Details = () => {
                                 <section className="flex items-center justify-between">
                                     <button onClick={handleClick} type="button" className="text-sm rounded font-light tracking-wid text-jungle px-4 py-2 transition-all border border-jungle/30 hover:border-jungle/60 bg-white">
                                         Previous Step
-                                </button>
+                                    </button>
                                     <button type="submit" className="text-sm rounded tracking-wider text-asphalt px-5 py-2 transition-all border border-ecru hover:border-jungle/20 bg-ecru/40 hover:bg-ecru/90">
                                         Complete Booking
                                     </button>

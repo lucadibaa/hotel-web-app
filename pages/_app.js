@@ -1,11 +1,12 @@
 import '../styles/globals.css'
 import { Provider } from 'react-redux'
 import NotificationProvider from '../components/assets/notifications/NotificationProvider'
-import store from '../redux/store'
+import { store, persistor } from '../redux/store'
 import { useEffect } from 'react'
 import { isTokenValid } from '../redux/userActions'
 import ProgressBar from "@badrap/bar-of-progress"
 import Router from 'next/router'
+import { PersistGate } from 'redux-persist/integration/react'
 
 const progress = new ProgressBar({
   size: 3,
@@ -26,9 +27,11 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={store}>
-      <NotificationProvider>
-        <Component {...pageProps} />
-      </NotificationProvider>
+      <PersistGate loading={null} persistor={persistor}>
+        <NotificationProvider>
+          <Component {...pageProps} />
+        </NotificationProvider>
+      </PersistGate>
     </Provider>
   )
 }

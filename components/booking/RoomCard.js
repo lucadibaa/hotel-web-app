@@ -92,7 +92,7 @@ const RoomCard = ({ room, name, img, guests, price, info, selectedGuests, datesR
                         <div className="mb-1 text-camel text-xl font-PlayfairDisplay font-semibold italic tracking-wide sm:mb-0.5">
                             {name}
                         </div>
-                        <span className="text-[15px]">Garden Suite</span>
+                        <span className="text-[15px]">{info?.view.split(' ')[0]} Suite</span>
                         <div className="text-[13px] mt-4 space-y-2.5 sm:mt-1.5">
                             <span>Sleeps {getDigits(guests)}  | {info?.bed} | {info?.sqmts} m²</span>
                             <div className="w-2/3 sm:w-full">This unique suite overlooks Baie Longue with an alfresco dining area for breakfasts with a view.</div>

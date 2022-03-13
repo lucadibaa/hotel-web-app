@@ -65,6 +65,8 @@ const Booking = ({ rooms }) => {
         if (sort === 'recommended') return -1
     }
 
+    const filteredRooms = rooms?.filter(r => r.name.toLowerCase().includes(searchInput.toLowerCase()) && getDigits(r.guests) >= guests)
+
     return (
         <Layout noBanner>
             <Head>
@@ -91,9 +93,12 @@ const Booking = ({ rooms }) => {
                     <section className="pt-2 sm:pt-0.5">
                         <div className="flex flex-wrap gap-2">
                             {
-                                rooms?.filter(r => r.name.toLowerCase().includes(searchInput.toLowerCase()) && getDigits(r.guests) >= guests).sort((a, b) => sortRooms(a, b)).map(r => (
-                                    <RoomCard key={r._id} room={r} name={r.name} slug={r.slug} img={r.image} guests={r.guests} price={r.price} info={r.info} selectedGuests={guests} datesRange={datesRange} />
-                                ))
+                                filteredRooms?.length > 0 ?
+                                    filteredRooms?.sort((a, b) => sortRooms(a, b)).map(r => (
+                                        <RoomCard key={r._id} room={r} name={r.name} slug={r.slug} img={r.image} guests={r.guests} price={r.price} info={r.info} selectedGuests={guests} datesRange={datesRange} />
+                                    ))
+                                    :
+                                    <div>No room match your criteria</div>
                             }
                         </div>
                     </section>
