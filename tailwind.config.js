@@ -38,7 +38,7 @@ module.exports = {
       },
       fontFamily: {
         PlayfairDisplay: ['"Playfair Display"', 'serif'],
-        Sofia: ['"Sofia Pro"', 'sans-serif'],
+        Sofia: ['Poppins', 'sans-serif'],
         Poppins: ['Poppins', 'sans-serif'],
       },
     },
