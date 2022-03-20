@@ -22,7 +22,7 @@ const Reservations = () => {
     const { reservationId } = router.query
 
     const [isModalOpen, setIsModalOpen] = useState(false)
-    const [search, setSearch] = useState('')
+    const [search, setSearch] = useState(reservationId || '')
     const [reservations, setReservations] = useState([])
     const [reservation, setReservation] = useState(null)
 
@@ -37,17 +37,19 @@ const Reservations = () => {
         })
     }
 
-    useEffect(async () => {
-        try {
-            const res = reservationId && await api.get(`/reservations/${reservationId}`)
-            setReservation(res?.data.reservation)
-
-        } catch (err) {
-            const error = err?.response?.data?.message
-            console.log(error || err)
-            setReservation(null)
-            dispatchNotification({ type: "ERROR", message: error || "something went wrong" })
+    useEffect(() => {
+        const getReservationById = async () => {
+            try {
+                const res = reservationId && await api.get(`/reservations/${reservationId || search}`)
+                setReservation(res?.data.reservation)
+            } catch (err) {
+                const error = err?.response?.data?.message
+                console.log(error || err)
+                setReservation(null)
+                dispatchNotification({ type: "ERROR", message: error || "something went wrong" })
+            }
         }
+        getReservationById()
     }, [reservationId])
 
     useEffect(() => {

@@ -8,28 +8,14 @@ import { MdCoffeeMaker, MdPets } from 'react-icons/md'
 import { useRouter } from "next/router"
 import { getRoomBySlug, getRooms } from "../../server/lib/rooms"
 
-export const getStaticPaths = async () => {
-    const rooms = await getRooms()
-
-    const paths = rooms?.map(room => {
-        return {
-            params: { slug: room.slug }
-        }
-    })
-
-    return {
-        paths,
-        fallback: false
-    }
-}
-
-export const getStaticProps = async ({ params: { slug } }) => {
-    const room = await getRoomBySlug(slug)
+export const getServerSideProps = async ({ params }) => {
+    const res = await fetch(`http://localhost:3000/api/rooms/${params.slug}`)
+    const { room } = await res.json()
 
     return {
         props: {
-            room: room || null
-        }
+            room
+        },
     }
 }
 
