@@ -13,7 +13,7 @@ export const getServerSideProps = async () => {
 
     return {
         props: {
-            rooms: rooms || []
+            rooms
         }
     }
 }

@@ -2,8 +2,12 @@ import api from "../../api/axios"
 import requests from "../../api/requests"
 
 export const getRooms = async () => {
-    const { data } = await api.get(requests.getRooms)
-    return data?.rooms
+    try {
+        const { data } = await api.get(requests.getRooms)
+        return data?.rooms
+    } catch (err) {
+        console.log(err)
+    }
 }
 
 export const getRoomBySlug = async slug => {
